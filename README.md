@@ -18,22 +18,75 @@
 	<img alt="💪 TypeScript: Strict" src="https://img.shields.io/badge/%F0%9F%92%AA_typescript-strict-21bb42.svg" />
 </p>
 
+> 🚨 **Hublint is very early stage and not yet fully implemented.**
+> WIP!
+
+> I also will probably change the name.
+
+Hublint checks that GitHub activity on your repository aligns with common expectations of smoothly-running projects.
+It provides rules for common issues with comments, issues, and pull requests.
+
+![Screenshot of colored output from hublint: see docs/screenshot-text.txt for text. Blue rule names, yellow high-level descriptions, gray docs links, red '3' in the last line.](docs/screenshot.png)
+
 ## Usage
 
+For now, pass a link to a comment, issue, or PR to `npx hublint`:
+
 ```shell
-npm i hublint
+npx hublint https://github.com/JoshuaKGoldberg/hublint-test/pull/2
 ```
 
-```ts
-import { greet } from "hublint";
+Soon there'll be a GitHub Action to run automatically.
 
-greet("Hello, world! 💖");
-```
+### All Rules
+
+Config key:
+
+- ✅: Recommended
+- 🔒: Strict
+
+| Area     | Hublint Rule                                                             | Description                                        | Config |
+| -------- | ------------------------------------------------------------------------ | -------------------------------------------------- | ------ |
+| Comments | [comment-nothing-to-say](./docs/comment-nothing-to-say.md)               | comments should be meaningful, not just '+1' bumps | 🔒     |
+| Issues   | [issue-required-fields-content](./docs/issue-required-fields-content.md) | required fields must have meaningful content       | ✅     |
+| PRs      | [pr-branch-non-default](./docs/pr-branch-non-default.md)                 | sent from a non-default branch                     | 🔒     |
+| PRs      | [pr-linked-issue](./docs/pr-linked-issue.md)                             | must be linked to an issue (with a label)          | 🔒     |
+| PRs      | [pr-task-completion](./docs/pr-task-completion.md)                       | all required tasks are [x] completed               | ✅     |
+| PRs      | [pr-title-conventional](./docs/pr-title-conventional.md)                 | title must be in conventional commit format        | 🔒     |
+| Texts    | [text-image-alt-text](./docs/text-image-alt-text.md)                     | images must have accessible alt text               | ✅     |
+
+Rules are generally titled in the format of `<entity>-<area>(-<concern>)`:
+
+- `<entity>`: one of `comment`, `issue`, `pr`, or the catch-all `text`
+- `<area>`: the part of the entity being checked, such as an issue's `required-fields` or a PR's `linked-issue`
+- `<concern>`: if the rule checks a specific part of the area, such as an issue's required fields `content`
+
+## Prior Art
+
+> 🚨 **Hublint is very early stage and not yet fully implemented.**
+> WIP!
+
+### Comparison with Neighboring Actions
+
+| Area     | Hublint Rule                                                             | accessibility-alt-text-bot | pr-compliance-action |
+| -------- | ------------------------------------------------------------------------ | -------------------------- | -------------------- |
+| Comments | [comment-nothing-to-say](./docs/comment-nothing-to-say.md)               |                            |                      |
+| Issues   | [issue-required-fields-content](./docs/issue-required-fields-content.md) |                            |                      |
+| PRs      | [pr-branch-non-default](./docs/pr-branch-non-default.md)                 |                            | ✔️                   |
+| PRs      | [pr-linked-issue](./docs/pr-linked-issue.md)                             |                            | ✔️                   |
+| PRs      | [pr-task-completion](./docs/pr-task-completion.md)                       |                            |                      |
+| PRs      | [pr-title-conventional](./docs/pr-title-conventional.md)                 |                            | ✔️                   |
+| Texts    | [text-image-alt-text](./docs/text-image-alt-text.md)                     | ✔️                         |                      |
+
+### Other Ecosystem Approaches
+
+- [Danger](https://danger.systems): is a much larger, more powerful system that has repositories write their rules in imperative configuration files.
+  However, Danger is not made for analyzing GitHub comments or issues, only pull requests.
 
 ## Development
 
 See [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md), then [`.github/DEVELOPMENT.md`](./.github/DEVELOPMENT.md).
-Thanks! 💖
+Thanks! 📋
 
 ## Contributors
 
@@ -55,4 +108,4 @@ Thanks! 💖
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- spellchecker: enable -->
 
-> 💝 This package was templated with [`create-typescript-app`](https://github.com/JoshuaKGoldberg/create-typescript-app) using the [Bingo engine](https://create.bingo).
+> 💝 This package was templated with [`create-typescript-app`](https://github.com/JoshuaKGoldberg/create-typescript-app) using the [Bingo framework](https://create.bingo).

@@ -1,2 +1,3 @@
-export * from "./greet.js";
-export * from "./types.js";
+export * from "./hublint.js";
+export type * from "./types/entities.js";
+export type * from "./types/rules.js";

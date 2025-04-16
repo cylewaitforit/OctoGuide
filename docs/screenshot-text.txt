@@ -1,0 +1,14 @@
+[pr-conventional-title] PR titles must be in conventional commit format.
+The PR title has an unknown type: 'wat'.
+Known types are: 'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'
+You'll want to replace the PR type with one of those known types.
+🗒️ Docs: https://github.com/JoshuaKGoldberg/hublint/blob/main/docs/rules/pr-conventional-title.md
+
+[text-image-alt-text] Images must have descriptive alt text.
+The following image is missing alt text:
+![](https://github.com/user-attachments/assets/f405c5f4-a761-40f3-a0c7-d3d94b270b33)
+🗒️ Docs: https://github.com/JoshuaKGoldberg/hublint/blob/main/docs/rules/text-image-alt-text.md
+
+[pr-linked-issue] PRs must be linked as closing an issue.
+This pull request is not linked as closing any issues.
+🗒️ Docs: https://github.com/JoshuaKGoldberg/hublint/blob/main/docs/rules/pr-linked-issue.md
