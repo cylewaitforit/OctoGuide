@@ -23,8 +23,6 @@ export interface IssueEntity {
 	user?: string;
 }
 
-export type LocatorType = "comment" | "issue" | "pull_request";
-
 export type PullRequestData =
 	RestEndpointMethodTypes["pulls"]["get"]["response"]["data"];
 

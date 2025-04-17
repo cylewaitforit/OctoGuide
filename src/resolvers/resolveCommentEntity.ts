@@ -1,7 +1,7 @@
 import { Octokit } from "octokit";
 
-import type { RepositoryLocator } from "../types/data";
-import type { CommentEntity, IssueData } from "../types/entities";
+import type { RepositoryLocator } from "../types/data.js";
+import type { CommentEntity, IssueData } from "../types/entities.js";
 
 export async function resolveCommentEntity(
 	locator: RepositoryLocator,

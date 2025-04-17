@@ -29,6 +29,9 @@ importers:
       conventional-commits-parser:
         specifier: ^6.1.0
         version: 6.1.0
+      is-comment-meaningless:
+        specifier: ^0.1.0
+        version: 0.1.0
       octokit:
         specifier: ^4.1.3
         version: 4.1.3
@@ -2336,6 +2339,10 @@ packages:
 
   is-arrayish@0.2.1:
     resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
+
+  is-comment-meaningless@0.1.0:
+    resolution: {integrity: sha512-eESLuyfnBSioMk+jxt9LIQ70DtUxQLj41YvXXMxDB+Q0Gzl1Q857grw9lj224pLBLdYD6cnnrv+j91CHzjFW3Q==}
+    engines: {node: '>=18.3.0'}
 
   is-core-module@2.16.1:
     resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
@@ -5949,6 +5956,8 @@ snapshots:
       is-decimal: 2.0.1
 
   is-arrayish@0.2.1: {}
+
+  is-comment-meaningless@0.1.0: {}
 
   is-core-module@2.16.1:
     dependencies:

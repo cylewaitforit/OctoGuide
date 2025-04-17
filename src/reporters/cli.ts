@@ -3,6 +3,12 @@ import chalk from "chalk";
 import type { RuleReport } from "../types/rules.js";
 
 export function cliReporter(reports: RuleReport[]) {
+	if (!reports.length) {
+		console.log(
+			`Found ${chalk.green(reports.length)} issue${reports.length > 1 ? "s" : ""}. Great! ✅`,
+		);
+	}
+
 	console.log("");
 
 	const byRule = Object.groupBy(reports, (report) => report.about.name);
@@ -31,7 +37,7 @@ export function cliReporter(reports: RuleReport[]) {
 			);
 			console.log(
 				chalk.gray(
-					`🗒️  Docs: https://github.com/JoshuaKGoldberg/hublint/blob/main/docs/rules/${report.about.name}.md`,
+					`🗒️  Docs: https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/${report.about.name}.md`,
 				),
 			);
 			console.log("");

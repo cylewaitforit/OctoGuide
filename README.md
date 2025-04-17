@@ -1,8 +1,8 @@
-<h1 align="center">Hublint</h1>
+<h1 align="center">OctoGuide</h1>
 
 <p align="center">
-	A linter for GitHub repository activity.
-	📋
+	Helps contributors adhere to best practices for your repository on GitHub.
+	🗺️
 </p>
 
 <p align="center">
@@ -11,32 +11,33 @@
 	<a href="#contributors" target="_blank"><img alt="👪 All Contributors: 1" src="https://img.shields.io/badge/%F0%9F%91%AA_all_contributors-1-21bb42.svg" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 	<!-- prettier-ignore-end -->
-	<a href="https://github.com/JoshuaKGoldberg/hublint/blob/main/.github/CODE_OF_CONDUCT.md" target="_blank"><img alt="🤝 Code of Conduct: Kept" src="https://img.shields.io/badge/%F0%9F%A4%9D_code_of_conduct-kept-21bb42" /></a>
-	<a href="https://codecov.io/gh/JoshuaKGoldberg/hublint" target="_blank"><img alt="🧪 Coverage" src="https://img.shields.io/codecov/c/github/JoshuaKGoldberg/hublint?label=%F0%9F%A7%AA%20coverage" /></a>
-	<a href="https://github.com/JoshuaKGoldberg/hublint/blob/main/LICENSE.md" target="_blank"><img alt="📝 License: MIT" src="https://img.shields.io/badge/%F0%9F%93%9D_license-MIT-21bb42.svg" /></a>
-	<a href="http://npmjs.com/package/hublint" target="_blank"><img alt="📦 npm version" src="https://img.shields.io/npm/v/hublint?color=21bb42&label=%F0%9F%93%A6%20npm" /></a>
+	<a href="https://github.com/JoshuaKGoldberg/octoguide/blob/main/.github/CODE_OF_CONDUCT.md" target="_blank"><img alt="🤝 Code of Conduct: Kept" src="https://img.shields.io/badge/%F0%9F%A4%9D_code_of_conduct-kept-21bb42" /></a>
+	<a href="https://codecov.io/gh/JoshuaKGoldberg/octoguide" target="_blank"><img alt="🧪 Coverage" src="https://img.shields.io/codecov/c/github/JoshuaKGoldberg/octoguide?label=%F0%9F%A7%AA%20coverage" /></a>
+	<a href="https://github.com/JoshuaKGoldberg/octoguide/blob/main/LICENSE.md" target="_blank"><img alt="📝 License: MIT" src="https://img.shields.io/badge/%F0%9F%93%9D_license-MIT-21bb42.svg" /></a>
+	<a href="http://npmjs.com/package/octoguide" target="_blank"><img alt="📦 npm version" src="https://img.shields.io/npm/v/octoguide?color=21bb42&label=%F0%9F%93%A6%20npm" /></a>
 	<img alt="💪 TypeScript: Strict" src="https://img.shields.io/badge/%F0%9F%92%AA_typescript-strict-21bb42.svg" />
 </p>
 
-> 🚨 **Hublint is very early stage and not yet fully implemented.**
+> 🚨 **OctoGuide is very early stage and not yet fully implemented.**
 > WIP!
 
-> I also will probably change the name.
+OctoGuide checks that contributor activity on your GitHub repository aligns with common expectations of smoothly-running projects.
+It will automatically post friendly comments when contributors take actions you don't want them to.
+Rules are provided for common issues with comments, issues, and pull requests.
 
-Hublint checks that GitHub activity on your repository aligns with common expectations of smoothly-running projects.
-It provides rules for common issues with comments, issues, and pull requests.
+![Screenshot of colored output from OctoGuide: see docs/screenshot-text.txt for text. Blue rule names, yellow high-level descriptions, gray docs links, red '3' in the last line.](docs/screenshot.png)
 
-![Screenshot of colored output from hublint: see docs/screenshot-text.txt for text. Blue rule names, yellow high-level descriptions, gray docs links, red '3' in the last line.](docs/screenshot.png)
+You can think of OctoGuide as a very friendly linter, but for online GitHub activity rather than source code.
 
 ## Usage
 
-For now, pass a link to a comment, issue, or PR to `npx hublint`:
+For now, pass a link to a comment, issue, or PR to `npx octoguide`:
 
 ```shell
-npx hublint https://github.com/JoshuaKGoldberg/hublint-test/pull/2
+npx octoguide https://github.com/JoshuaKGoldberg/octoguide-test/pull/2
 ```
 
-Soon there'll be a GitHub Action to run automatically.
+Soon there'll be a GitHub Action that runs automatically and posts replies on GitHub.
 
 ### All Rules
 
@@ -45,9 +46,9 @@ Config key:
 - ✅: Recommended
 - 🔒: Strict
 
-| Area     | Hublint Rule                                                             | Description                                        | Config |
+| Area     | OctoGuide Rule                                                           | Description                                        | Config |
 | -------- | ------------------------------------------------------------------------ | -------------------------------------------------- | ------ |
-| Comments | [comment-nothing-to-say](./docs/comment-nothing-to-say.md)               | comments should be meaningful, not just '+1' bumps | 🔒     |
+| Comments | [comment-meaningless](./docs/comment-meaningless.md)                     | comments should be meaningful, not just '+1' bumps | 🔒     |
 | Issues   | [issue-required-fields-content](./docs/issue-required-fields-content.md) | required fields must have meaningful content       | ✅     |
 | PRs      | [pr-branch-non-default](./docs/pr-branch-non-default.md)                 | sent from a non-default branch                     | 🔒     |
 | PRs      | [pr-linked-issue](./docs/pr-linked-issue.md)                             | must be linked to an issue (with a label)          | 🔒     |
@@ -63,14 +64,14 @@ Rules are generally titled in the format of `<entity>-<area>(-<concern>)`:
 
 ## Prior Art
 
-> 🚨 **Hublint is very early stage and not yet fully implemented.**
+> 🚨 **OctoGuide is very early stage and not yet fully implemented.**
 > WIP!
 
 ### Comparison with Neighboring Actions
 
-| Area     | Hublint Rule                                                             | accessibility-alt-text-bot | pr-compliance-action |
+| Area     | OctoGuide Rule                                                           | accessibility-alt-text-bot | pr-compliance-action |
 | -------- | ------------------------------------------------------------------------ | -------------------------- | -------------------- |
-| Comments | [comment-nothing-to-say](./docs/comment-nothing-to-say.md)               |                            |                      |
+| Comments | [comment-meaningless](./docs/comment-meaningless.md)                     |                            |                      |
 | Issues   | [issue-required-fields-content](./docs/issue-required-fields-content.md) |                            |                      |
 | PRs      | [pr-branch-non-default](./docs/pr-branch-non-default.md)                 |                            | ✔️                   |
 | PRs      | [pr-linked-issue](./docs/pr-linked-issue.md)                             |                            | ✔️                   |
@@ -86,7 +87,7 @@ Rules are generally titled in the format of `<entity>-<area>(-<concern>)`:
 ## Development
 
 See [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md), then [`.github/DEVELOPMENT.md`](./.github/DEVELOPMENT.md).
-Thanks! 📋
+Thanks! 🗺️
 
 ## Contributors
 
@@ -97,7 +98,7 @@ Thanks! 📋
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt="Josh Goldberg ✨"/><br /><sub><b>Josh Goldberg ✨</b></sub></a><br /><a href="https://github.com/JoshuaKGoldberg/hublint/commits?author=JoshuaKGoldberg" title="Code">💻</a> <a href="#content-JoshuaKGoldberg" title="Content">🖋</a> <a href="https://github.com/JoshuaKGoldberg/hublint/commits?author=JoshuaKGoldberg" title="Documentation">📖</a> <a href="#ideas-JoshuaKGoldberg" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-JoshuaKGoldberg" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-JoshuaKGoldberg" title="Maintenance">🚧</a> <a href="#projectManagement-JoshuaKGoldberg" title="Project Management">📆</a> <a href="#tool-JoshuaKGoldberg" title="Tools">🔧</a></td>
+      <td align="center"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt="Josh Goldberg ✨"/><br /><sub><b>Josh Goldberg ✨</b></sub></a><br /><a href="https://github.com/JoshuaKGoldberg/octoguide/commits?author=JoshuaKGoldberg" title="Code">💻</a> <a href="#content-JoshuaKGoldberg" title="Content">🖋</a> <a href="https://github.com/JoshuaKGoldberg/octoguide/commits?author=JoshuaKGoldberg" title="Documentation">📖</a> <a href="#ideas-JoshuaKGoldberg" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-JoshuaKGoldberg" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-JoshuaKGoldberg" title="Maintenance">🚧</a> <a href="#projectManagement-JoshuaKGoldberg" title="Project Management">📆</a> <a href="#tool-JoshuaKGoldberg" title="Tools">🔧</a></td>
     </tr>
   </tbody>
 </table>

@@ -5,12 +5,12 @@ import type { RuleContext, RuleReport } from "./types/rules.js";
 import { resolveLintable } from "./resolvers/resolveEntity.js";
 import { rules } from "./rules/index.js";
 
-export interface HublintSettings {
+export interface OctoGuideSettings {
 	githubToken?: string | undefined;
 	url: string;
 }
 
-export async function hublint({ githubToken, url }: HublintSettings) {
+export async function runOctoGuide({ githubToken, url }: OctoGuideSettings) {
 	const octokit = await octokitFromAuth({
 		auth: githubToken,
 	});

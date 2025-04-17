@@ -1,11 +1,13 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 
-import { hublint } from "../index.js";
+import { runOctoGuide } from "../index.js";
 import { cliReporter } from "../reporters/cli.js";
 
-export async function runHublintAction(context: typeof github.context) {
-	const reports = await hublint({
+// TODO :)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function runOctoGuideAction(context: typeof github.context) {
+	const reports = await runOctoGuide({
 		githubToken: core.getInput("github-token"),
 
 		// will need to get the locator somehow,

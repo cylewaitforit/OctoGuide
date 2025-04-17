@@ -2,7 +2,7 @@ import { Octokit } from "octokit";
 import parseGitHubUrl from "parse-github-url";
 
 import type { RepositoryLocator } from "../types/data.js";
-import type { Entity, IssueData, PullRequestData } from "../types/entities.js";
+import type { Entity } from "../types/entities.js";
 
 import { resolveCommentEntity } from "./resolveCommentEntity.js";
 import { resolveIssueEntity } from "./resolveIssueEntity.js";

@@ -10,5 +10,5 @@
 		"node_modules",
 		"pnpm-lock.yaml"
 	],
-	"words": ["Lintable", "hublint", "issuecomment"]
+	"words": ["issuecomment", "lintable", "octoguide"]
 }

@@ -1,7 +1,7 @@
 import { Octokit } from "octokit";
 
-import type { RepositoryLocator } from "../types/data";
-import type { PullRequestEntity } from "../types/entities";
+import type { RepositoryLocator } from "../types/data.js";
+import type { PullRequestEntity } from "../types/entities.js";
 
 export async function resolvePullRequestEntity(
 	locator: RepositoryLocator,

@@ -1,5 +1,5 @@
 import * as github from "@actions/github";
 
-import { runHublintAction } from "./runHublintAction.js";
+import { runOctoGuideAction } from "./runOctoGuideAction.js";
 
-await runHublintAction(github.context);
+await runOctoGuideAction(github.context);
