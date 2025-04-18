@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.1](https://github.com/JoshuaKGoldberg/octoguide/compare/0.1.0...0.1.1) (2025-04-18)
+
+### Bug Fixes
+
+- add lib/ to released package ([b37e089](https://github.com/JoshuaKGoldberg/octoguide/commit/b37e0895888866cba04879c9c2b791b4396330d9))
+
 # 0.1.0 (2025-04-18)
 
 ### Features
