@@ -1,0 +1,40 @@
+# `pr-title-conventional`
+
+> PR titles should be in conventional commit format.
+
+> Included in config: 🔒 strict
+
+Some repositories require pull request titles to follow the [Conventional Commits](https://www.conventionalcommits.org) format.
+Doing so yields two benefits:
+
+- Human: it becomes easier to categorize and understand pull request purposes quickly
+- Machine: automated tooling can parse those titles into semver-based releases
+
+If a repository has this rule enabled, it's likely aiming for either or both of those benefits.
+
+## Allowed Titles
+
+This rule asks that titles be in either format:
+
+```plaintext
+type: body
+type(scope): body
+```
+
+- `type`: the conventional commit type, such as `docs` or `fix`
+- `scope`: an optional sub-area, commonly a package name if a monorepo
+- `body`: a lower-case description
+
+Example acceptable titles include:
+
+```plaintext
+docs: mention 'rick' feature in README.md
+feat: add optional new 'roll' option to API
+fix(parser): don't throw error on consecutive semicolons
+```
+
+## See More
+
+- [Conventional Commits](https://www.conventionalcommits.org)
+- [conventional-commit-types](https://www.npmjs.com/package/conventional-commit-types)
+- [Rule source](../../src/rules/prTitleConventional.ts)

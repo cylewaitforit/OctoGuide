@@ -4,7 +4,7 @@ export const prBranchNonDefault = {
 	about: {
 		config: "strict",
 		description:
-			"PRs must not be sent from their head repository's default branch.",
+			"PRs should not be sent from their head repository's default branch.",
 		name: "pr-branch-non-default",
 	},
 	async pullRequest(context, entity) {

@@ -4,7 +4,7 @@ import { wrapSafe } from "../types/utils.js";
 
 export const prTaskCompletion = {
 	about: {
-		config: "strict",
+		config: "recommended",
 		description:
 			"Tasks lists from the pull request template should be [x] filled out.",
 		name: "pr-conventional-title",

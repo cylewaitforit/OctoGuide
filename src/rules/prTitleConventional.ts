@@ -11,7 +11,7 @@ const commitParser = new CommitParser();
 export const prTitleConventional = {
 	about: {
 		config: "strict",
-		description: "PR titles must be in conventional commit format.",
+		description: "PR titles should be in conventional commit format.",
 		name: "pr-conventional-title",
 	},
 	pullRequest(context, entity) {

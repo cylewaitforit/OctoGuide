@@ -10,7 +10,7 @@ import type { Rule, RuleContext } from "../types/rules.js";
 export const textImageAltText = {
 	about: {
 		config: "recommended",
-		description: "Images must have descriptive alt text.",
+		description: "Images should have descriptive alt text.",
 		name: "text-image-alt-text",
 	},
 	comment: checkEntity,

@@ -46,15 +46,16 @@ Config key:
 - ✅: Recommended
 - 🔒: Strict
 
-| Area     | OctoGuide Rule                                                           | Description                                        | Config |
-| -------- | ------------------------------------------------------------------------ | -------------------------------------------------- | ------ |
-| Comments | [comment-meaningless](./docs/comment-meaningless.md)                     | comments should be meaningful, not just '+1' bumps | 🔒     |
-| Issues   | [issue-required-fields-content](./docs/issue-required-fields-content.md) | required fields must have meaningful content       | ✅     |
-| PRs      | [pr-branch-non-default](./docs/pr-branch-non-default.md)                 | sent from a non-default branch                     | 🔒     |
-| PRs      | [pr-linked-issue](./docs/pr-linked-issue.md)                             | must be linked to an issue (with a label)          | 🔒     |
-| PRs      | [pr-task-completion](./docs/pr-task-completion.md)                       | all required tasks are [x] completed               | ✅     |
-| PRs      | [pr-title-conventional](./docs/pr-title-conventional.md)                 | title must be in conventional commit format        | 🔒     |
-| Texts    | [text-image-alt-text](./docs/text-image-alt-text.md)                     | images must have accessible alt text               | ✅     |
+| Area     | OctoGuide Rule                                                 | Description                                 | Config |
+| -------- | -------------------------------------------------------------- | ------------------------------------------- | ------ |
+| Comments | [comment-meaningless](./docs/rules/comment-meaningless.md)     | should be meaningful, not just '+1' bumps   | 🔒     |
+| PRs      | [pr-branch-non-default](./docs/rules/pr-branch-non-default.md) | sent from a non-default branch              | 🔒     |
+| PRs      | [pr-linked-issue](./docs/rules/pr-linked-issue.md)             | must be linked to an issue (with a label)   | 🔒     |
+| PRs      | [pr-task-completion](./docs/rules/pr-task-completion.md)       | all required tasks are [x] completed        | ✅     |
+| PRs      | [pr-title-conventional](./docs/rules/pr-title-conventional.md) | title must be in conventional commit format | 🔒     |
+| Texts    | [text-image-alt-text](./docs/rules/text-image-alt-text.md)     | images must have accessible alt text        | ✅     |
+
+<!-- | Issues   | [issue-required-fields-content](./docs/rules/issue-required-fields-content.md) | required fields must have meaningful content | ✅     | -->
 
 Rules are generally titled in the format of `<entity>-<area>(-<concern>)`:
 
