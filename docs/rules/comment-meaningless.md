@@ -2,6 +2,8 @@
 
 > Comments should be meaningful, not just '+1'-style bumps.
 
+> Included in config: 🔒 strict
+
 Posting replies containing just _"+1"_, \__any update?"_, or other phrases that don't add any new meaning to the discussion can be mildly disruptive:
 
 - They send a notification to everybody subscribed to the issue or PR
