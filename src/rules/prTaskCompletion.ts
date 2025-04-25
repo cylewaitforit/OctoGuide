@@ -7,7 +7,11 @@ export const prTaskCompletion = {
 		config: "recommended",
 		description:
 			"Tasks lists from the pull request template should be [x] filled out.",
-		name: "pr-conventional-title",
+		explanation: [
+			`This repository provides a set of tasks that pull request authors are expected to complete.`,
+			`Those tasks should be marked as completed with a \`[x]\` in the pull request description.`,
+		],
+		name: "pr-title-completion",
 	},
 	async pullRequest(context, entity) {
 		const templateResponse = await wrapSafe(
@@ -41,7 +45,7 @@ export const prTaskCompletion = {
 			context.report({
 				primary:
 					"This PR's body is empty, but there is a template with tasks to be done.",
-				secondary: [
+				suggestion: [
 					"Please fill out the pull request template and make sure all the tasks are [x] checked.",
 				],
 			});
@@ -69,8 +73,11 @@ export const prTaskCompletion = {
 
 		context.report({
 			primary:
-				"This PR's body is missing [x] checks on the following the tasks from the PR template.",
+				"This PR's body is missing [x] checks on the following tasks from the PR template.",
 			secondary: missingTasks,
+			suggestion: [
+				"Please complete those tasks and mark the checks as [x] completed.",
+			],
 		});
 	},
 } satisfies Rule;

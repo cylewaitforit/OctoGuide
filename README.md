@@ -23,21 +23,52 @@
 
 OctoGuide checks that contributor activity on your GitHub repository aligns with common expectations of smoothly-running projects.
 It will automatically post friendly comments when contributors take actions you don't want them to.
+
+![Screenshot of a github-actions bot comment: see docs/screenshot-text.txt for text](docs/screenshot.webp)
+
 Rules are provided for common issues with comments, issues, and pull requests.
-
-![Screenshot of colored output from OctoGuide: see docs/screenshot-text.txt for text: blue rule names, yellow high-level descriptions, gray docs links, red '3' in the last line.](docs/screenshot.png)
-
-You can think of OctoGuide as a very friendly linter, but for online GitHub activity rather than source code.
+You can think of OctoGuide as a very friendly linter, but for online GitHub activity rather than code.
 
 ## Usage
 
-For now, pass a link to a comment, issue, or PR to `npx octoguide`:
+OctoGuide can run quickly in GitHub Actions for comment, issue, and pull request events:
+
+```yml
+jobs:
+  octoguide:
+    if: ${{ !endsWith(github.actor, '[bot]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: JoshuaKGoldberg/octoguide@v0.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+name: OctoGuide
+
+on:
+  issue_comment:
+    types:
+      - created
+      - edited
+  issues:
+    types:
+      - edited
+      - opened
+  pull_request:
+    types:
+      - edited
+      - opened
+
+permissions:
+  issues: write
+  pull-requests: write
+```
+
+You can also preview what the action would report with its npm CLI:
 
 ```shell
 npx octoguide https://github.com/JoshuaKGoldberg/octoguide-test/pull/2
 ```
-
-Soon there'll be a GitHub Action that runs automatically and posts replies on GitHub.
 
 ### All Rules
 

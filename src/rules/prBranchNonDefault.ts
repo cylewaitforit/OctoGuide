@@ -5,6 +5,10 @@ export const prBranchNonDefault = {
 		config: "strict",
 		description:
 			"PRs should not be sent from their head repository's default branch.",
+		explanation: [
+			`Sending a PR from a repository's default branch, commonly \`main\`, means that repository will have a hard time pulling in updates from the upstream repository.`,
+			`It's generally recommended to instead create a new branch per pull request.`,
+		],
 		name: "pr-branch-non-default",
 	},
 	async pullRequest(context, entity) {
@@ -18,7 +22,12 @@ export const prBranchNonDefault = {
 				primary: "This PR is sent from the head repository's default branch",
 				secondary: [
 					`Sending a PR from a default branch means the head repository can't easily be updated after the PR is merged.`,
-					`Please create a new branch and send the PR from there.`,
+				],
+				suggestion: [
+					"You'll need to:",
+					"1. Create a new branch on your fork",
+					"2. Send a new pull request from that branch",
+					"3. Close this pull request",
 				],
 			});
 		}

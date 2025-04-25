@@ -43,13 +43,14 @@ export default tseslint.config(
 		languageOptions: {
 			parserOptions: {
 				projectService: {
-					allowDefaultProject: ["*.config.*s", "bin/index.js"],
+					allowDefaultProject: ["*.config.*s", "bin/index.js", "postbuild.js"],
 				},
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},
 		rules: {
 			"n/no-missing-import": "off",
+			"n/no-unsupported-features/node-builtins": "off",
 
 			// Stylistic concerns that don't interfere with Prettier
 			"logical-assignment-operators": [

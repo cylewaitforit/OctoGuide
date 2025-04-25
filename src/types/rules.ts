@@ -19,6 +19,7 @@ export interface Rule {
 export interface RuleAbout {
 	config: ConfigName;
 	description: string;
+	explanation: string[];
 	name: string;
 }
 
@@ -41,6 +42,7 @@ export interface RuleReport {
 export interface RuleReportData {
 	primary: string;
 	secondary?: string[];
+	suggestion: string[];
 }
 
 export type RuleReporter = (data: RuleReportData) => void;

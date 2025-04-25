@@ -16,6 +16,10 @@ export const prLinkedIssue = {
 	about: {
 		config: "strict",
 		description: "PRs should be linked as closing an issue.",
+		explanation: [
+			`This repository keeps to GitHub issues for discussing potential changes.`,
+			`Most or all changes should be marked as approved in an issue before a pull request is sent to resolve them.`,
+		],
 		name: "pr-linked-issue",
 	},
 	async pullRequest(context, entity) {
@@ -46,6 +50,12 @@ export const prLinkedIssue = {
 
 		context.report({
 			primary: "This pull request is not linked as closing any issues.",
+			suggestion: [
+				"To resolve this report:",
+				"* If this is a straightforward documentation change that doesn't need an issue, you can ignore this report",
+				"* If there is a backing issue, add a 'fixes #...' link to the pull request body",
+				"* Otherwise, file an issue explaining what you'd like to happen",
+			],
 		});
 	},
 } satisfies Rule;

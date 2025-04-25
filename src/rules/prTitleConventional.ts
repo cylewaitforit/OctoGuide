@@ -12,14 +12,22 @@ export const prTitleConventional = {
 	about: {
 		config: "strict",
 		description: "PR titles should be in conventional commit format.",
-		name: "pr-conventional-title",
+		explanation: [
+			`This repository asks that pull request titles start with a type in the [Conventional Commits](https://www.conventionalcommits.org) format.`,
+			`Doing so helps make the purpose of each pull request clear for humans and machines.`,
+		],
+		name: "pr-title-conventional",
 	},
 	pullRequest(context, entity) {
 		const parsed = commitParser.parse(entity.data.title);
 		if (!parsed.type) {
 			context.report({
-				primary: `The PR title is missing a conventional commit type, such as 'docs: ' or 'feat: ':`,
-				secondary: [entity.data.title],
+				primary: `The PR title is missing a conventional commit type, such as _"docs: "_ or _"feat: "_:`,
+				suggestion: [
+					parsed.header
+						? `To resolve this report, add a conventional commit type in front of the title, like _"feat: ${parsed.header}"_.`
+						: `To resolve this report, add a conventional commit type in front of the title.`,
+				],
 			});
 			return;
 		}
@@ -32,7 +40,11 @@ export const prTitleConventional = {
 						.sort()
 						.map((type) => `'${type}'`)
 						.join(", ")}`,
-					`You'll want to replace the PR type with one of those known types.`,
+				],
+				suggestion: [
+					parsed.subject
+						? `To resolve this report, replace the current type with one of those known types, like _"feat: ${parsed.subject}"_.`
+						: `To resolve this report, replace the current type with one of those known types.`,
 				],
 			});
 			return;
@@ -41,8 +53,8 @@ export const prTitleConventional = {
 		if (!parsed.subject) {
 			context.report({
 				primary: `PR title is missing a subject after its type.`,
-				secondary: [
-					`You'll want to add text after the type, like '${parsed.type}: etc. etc.'`,
+				suggestion: [
+					`To resolve this report, add text after the type, like _"${parsed.type}: etc."_`,
 				],
 			});
 			return;

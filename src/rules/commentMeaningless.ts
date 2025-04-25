@@ -6,6 +6,10 @@ export const commentMeaningless = {
 	about: {
 		config: "strict",
 		description: "Comments should be meaningful, not just '+1'-style bumps.",
+		explanation: [
+			`Replies containing just _"+1"_, _any update?"_, or other phrases without new information aren't helpful.`,
+			`They cause unnecessary notifications for other contributors and take up space.`,
+		],
 		name: "comment-meaningless",
 	},
 	comment(context, entity) {
@@ -17,10 +21,11 @@ export const commentMeaningless = {
 		// TODO: tailor the messaging once we get a reason
 		// https://github.com/JoshuaKGoldberg/is-comment-meaningless/issues/6
 		context.report({
-			primary: `Saying just '${text}' is unnecessary: it doesn't add any new information to the discussion.`,
-			secondary: [
-				"Although your enthusiasm is appreciated, posting a new comment gives everyone subscribed to the thread.",
-				`It's generally better to give a GitHub emoji reaction instead.`,
+			primary: `Saying just _"${text}"_ doesn't add any new information to the discussion.`,
+			suggestion: [
+				`To resolve this report:`,
+				`* If you have new information that'll help the discussion, edit it into the comment`,
+				`* Otherwise, delete the comment and emoji react to the ${entity.parentType}`,
 			],
 		});
 	},
