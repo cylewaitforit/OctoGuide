@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.3.0](https://github.com/JoshuaKGoldberg/octoguide/compare/0.2.1...0.3.0) (2025-04-25)
+
+### Features
+
+- allow specifying with.config/--config ([#40](https://github.com/JoshuaKGoldberg/octoguide/issues/40)) ([841c60a](https://github.com/JoshuaKGoldberg/octoguide/commit/841c60ab1a798c7a4922d9ff0a0116847b9773ad)), closes [#38](https://github.com/JoshuaKGoldberg/octoguide/issues/38)
+
 ## [0.2.1](https://github.com/JoshuaKGoldberg/octoguide/compare/0.2.0...0.2.1) (2025-04-25)
 
 ### Bug Fixes
