@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1](https://github.com/JoshuaKGoldberg/octoguide/compare/0.2.0...0.2.1) (2025-04-25)
+
+### Bug Fixes
+
+- **deps:** update dependency is-comment-meaningless to ^0.2.0 ([#37](https://github.com/JoshuaKGoldberg/octoguide/issues/37)) ([e5664d4](https://github.com/JoshuaKGoldberg/octoguide/commit/e5664d49c636829da211d24e617430408a3c88ed))
+
 # [0.2.0](https://github.com/JoshuaKGoldberg/octoguide/compare/0.1.2...0.2.0) (2025-04-25)
 
 ### Features
