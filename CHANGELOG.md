@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.1](https://github.com/JoshuaKGoldberg/octoguide/compare/0.3.0...0.3.1) (2025-04-25)
+
+### Bug Fixes
+
+- add missing inputs.config to action.yml ([3e7fa3f](https://github.com/JoshuaKGoldberg/octoguide/commit/3e7fa3f6c06d97659d74c7675d11068da93deb70))
+
 # [0.3.0](https://github.com/JoshuaKGoldberg/octoguide/compare/0.2.1...0.3.0) (2025-04-25)
 
 ### Features
