@@ -85201,7 +85201,7 @@ function wrappy (fn, cb) {
 __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2819);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _runOctoGuideAction_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(8650);
+/* harmony import */ var _runOctoGuideAction_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1955);
 
 
 await (0,_runOctoGuideAction_js__WEBPACK_IMPORTED_MODULE_1__/* .runOctoGuideAction */ .t)(_actions_github__WEBPACK_IMPORTED_MODULE_0__.context);
@@ -85211,7 +85211,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 8650:
+/***/ 1955:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -94190,12 +94190,12 @@ class IssueLikeCommentActor extends IssueLikeActorBase {
     }
 }
 
-;// CONCATENATED MODULE: ./src/actors/actorFactory.ts
+;// CONCATENATED MODULE: ./src/actors/createActor.ts
 
 
 
 
-function actorFactory(locator, octokit, url) {
+function createActor(locator, octokit, url) {
     const matches = /(discussions|issues|pull)\/(\d+)/.exec(url);
     if (!matches) {
         return undefined;
@@ -94220,9 +94220,9 @@ function actorFactory(locator, octokit, url) {
 // EXTERNAL MODULE: ./node_modules/.pnpm/parse-github-url@1.0.3/node_modules/parse-github-url/index.js
 var parse_github_url = __nccwpck_require__(8468);
 var parse_github_url_default = /*#__PURE__*/__nccwpck_require__.n(parse_github_url);
-;// CONCATENATED MODULE: ./src/actors/resolveLocator.ts
+;// CONCATENATED MODULE: ./src/actors/parseLocator.ts
 
-function resolveLocator(url) {
+function parseLocator(url) {
     const parsed = parse_github_url_default()(url);
     if (!parsed?.owner || !parsed.name) {
         return undefined;
@@ -95440,11 +95440,11 @@ async function runOctoGuide({ config = "recommended", githubToken, url, }) {
     const octokit = await octokitFromAuth({
         auth: githubToken,
     });
-    const locator = resolveLocator(url);
+    const locator = parseLocator(url);
     if (!locator) {
         throw new Error("Could not resolve GitHub entity locator.");
     }
-    const actor = actorFactory(locator, octokit, url);
+    const actor = createActor(locator, octokit, url);
     if (!actor) {
         throw new Error("Could not resolve GitHub entity actor.");
     }
@@ -96256,7 +96256,6 @@ function createCommentIdentifier(entity) {
 function createCommentBody(entity, message) {
     return [
         message,
-        "---",
         `> 🗺️ _This message was posted automatically by [OctoGuide](https://github.com/JoshuaKGoldberg/OctoGuide): a bot for GitHub repository best practices._`,
         createCommentIdentifier(entity),
     ].join("\n\n");
