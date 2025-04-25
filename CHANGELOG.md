@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.5.0](https://github.com/JoshuaKGoldberg/octoguide/compare/0.4.0...0.5.0) (2025-04-25)
+
+### Features
+
+- remove the --- ([bba402a](https://github.com/JoshuaKGoldberg/octoguide/commit/bba402ab8899bd0e6692130a92efb7c8e1854f27))
+
 # [0.4.0](https://github.com/JoshuaKGoldberg/octoguide/compare/0.3.1...0.4.0) (2025-04-25)
 
 ### Features
