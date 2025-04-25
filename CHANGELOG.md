@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.2.0](https://github.com/JoshuaKGoldberg/octoguide/compare/0.1.2...0.2.0) (2025-04-25)
+
+### Features
+
+- implement initial GitHub Action ([#31](https://github.com/JoshuaKGoldberg/octoguide/issues/31)) ([078feb7](https://github.com/JoshuaKGoldberg/octoguide/commit/078feb73d4cb1221834d39bbab084b1aa4cc3c09)), closes [#19](https://github.com/JoshuaKGoldberg/octoguide/issues/19)
+
 ## [0.1.2](https://github.com/JoshuaKGoldberg/octoguide/compare/0.1.1...0.1.2) (2025-04-23)
 
 ### Bug Fixes
