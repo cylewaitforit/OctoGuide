@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.8.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.7.0...0.8.0) (2025-04-28)
+
+### Features
+
+- add website and logo/mascot ([#53](https://github.com/JoshuaKGoldberg/OctoGuide/issues/53)) ([ded852b](https://github.com/JoshuaKGoldberg/OctoGuide/commit/ded852b3aaf80d0aa640fc795f08921ca9c3eb23)), closes [#52](https://github.com/JoshuaKGoldberg/OctoGuide/issues/52)
+
 # [0.7.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.6.0...0.7.0) (2025-04-28)
 
 ### Features
