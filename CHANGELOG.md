@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.2](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.1...0.8.2) (2025-04-28)
+
+### Bug Fixes
+
+- clarify pr-task-completion explanation ([50281d4](https://github.com/JoshuaKGoldberg/OctoGuide/commit/50281d435b1d77285a424d8efebab471ebf0a9fa))
+
 ## [0.8.1](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.0...0.8.1) (2025-04-28)
 
 ### Bug Fixes
