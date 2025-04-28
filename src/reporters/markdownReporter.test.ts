@@ -39,7 +39,7 @@ describe(markdownReporter, () => {
 		).toMatchInlineSnapshot(`
 			"👋 Hi, thanks for the issue! A scan flagged a concern with it. Could you please take a look?
 
-			[[**fake-rule**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/fake-rule.md)] Fake primary. Fake explanation. Fake suggestion."
+			[[**fake-rule**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/fake-rule.md)] Fake primary. Fake explanation. Fake suggestion."
 		`);
 	});
 
@@ -58,7 +58,7 @@ describe(markdownReporter, () => {
 		).toMatchInlineSnapshot(`
 			"👋 Hi, thanks for the issue! A scan flagged some concerns with it. Could you please take a look?
 
-			[[**fake-rule**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/fake-rule.md)] Fake explanation.
+			[[**fake-rule**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/fake-rule.md)] Fake explanation.
 
 			Fake primary. Fake suggestion.
 
@@ -87,9 +87,9 @@ describe(markdownReporter, () => {
 		).toMatchInlineSnapshot(`
 			"👋 Hi, thanks for the issue! A scan flagged some concerns with it. Could you please take a look?
 
-			[[**first**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/first.md)] Fake primary. Fake explanation. Fake suggestion.
+			[[**first**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/first.md)] Fake primary. Fake explanation. Fake suggestion.
 
-			[[**second**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/second.md)] Fake primary. Fake explanation. Fake suggestion."
+			[[**second**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/second.md)] Fake primary. Fake explanation. Fake suggestion."
 		`);
 	});
 
@@ -128,13 +128,13 @@ describe(markdownReporter, () => {
 		).toMatchInlineSnapshot(`
 			"👋 Hi, thanks for the issue! A scan flagged some concerns with it. Could you please take a look?
 
-			[[**first**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/first.md)] Fake explanation.
+			[[**first**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/first.md)] Fake explanation.
 
 			Fake primary. Fake suggestion.
 
 			Fake primary. Fake suggestion.
 
-			[[**second**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/second.md)] Fake explanation.
+			[[**second**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/second.md)] Fake explanation.
 
 			Fake primary. Fake suggestion.
 

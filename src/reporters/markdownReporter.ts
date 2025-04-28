@@ -9,7 +9,7 @@ export function markdownReporter(entity: Entity, reports: RuleReport[]) {
 
 	const printedReports = Object.values(byRule).map((ruleReports) => {
 		const { about } = ruleReports[0];
-		const start = `[[**${about.name}**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/${about.name}.md)]`;
+		const start = `[[**${about.name}**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/${about.name}.md)]`;
 
 		if (ruleReports.length > 1) {
 			return [

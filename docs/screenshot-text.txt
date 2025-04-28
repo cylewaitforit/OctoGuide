@@ -1,6 +1,6 @@
 👋 Hi @JoshuaKGoldberg, thanks for the issue! A scan flagged a concern with it. Could you please take a look?
 
-[[**text-image-alt-text**](https://github.com/JoshuaKGoldberg/octoguide/blob/main/docs/rules/text-image-alt-text.md)] The following image is missing alt text:
+[[**text-image-alt-text**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/text-image-alt-text.md)] The following image is missing alt text:
 
 > ```md
 > ![](https://github.com/user-attachments/assets/a8c44dd9-061a-41cf-a408-6774a872c737)

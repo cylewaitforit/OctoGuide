@@ -4,7 +4,7 @@
 	"description": "A linter for GitHub repository activity. 🗺️",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/JoshuaKGoldberg/octoguide.git"
+		"url": "git+https://github.com/JoshuaKGoldberg/OctoGuide.git"
 	},
 	"license": "MIT",
 	"author": {
