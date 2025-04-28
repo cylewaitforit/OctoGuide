@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.10.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.9.0...0.10.0) (2025-04-28)
+
+### Features
+
+- add prBodyNotEmpty rule ([#46](https://github.com/JoshuaKGoldberg/OctoGuide/issues/46)) ([6f64f38](https://github.com/JoshuaKGoldberg/OctoGuide/commit/6f64f38f4552d9478b496b7c6285ab465e352d5c)), closes [#25](https://github.com/JoshuaKGoldberg/OctoGuide/issues/25)
+
 # [0.9.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.4...0.9.0) (2025-04-28)
 
 ### Features
