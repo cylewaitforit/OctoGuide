@@ -7,10 +7,10 @@ export const prTaskCompletion = defineRule({
 		description:
 			"Tasks lists from the pull request template should be [x] filled out.",
 		explanation: [
-			`This repository provides a set of tasks that pull request authors are expected to complete.`,
+			`Repositories often provide a set of tasks that pull request authors are expected to complete.`,
 			`Those tasks should be marked as completed with a \`[x]\` in the pull request description.`,
 		],
-		name: "pr-title-completion",
+		name: "pr-task-completion",
 	},
 	async pullRequest(context, entity) {
 		const templateResponse = await wrapSafe(
