@@ -1,5 +1,6 @@
 {
   "badgeTemplate": "\t<a href=\"#contributors\" target=\"_blank\"><img alt=\"👪 All Contributors: <%= contributors.length %>\" src=\"https://img.shields.io/badge/%F0%9F%91%AA_all_contributors-<%= contributors.length %>-21bb42.svg\" /></a>",
+  "commitConvention": "angular",
   "commitType": "docs",
   "contributors": [
     {
@@ -21,31 +22,34 @@
       "profile": "http://www.joshuakgoldberg.com"
     },
     {
-      "login": "phryneas",
-      "name": "Lenz Weber-Tronic",
       "avatar_url": "https://avatars.githubusercontent.com/u/4282439?v=4",
-      "profile": "https://phryneas.de",
       "contributions": [
         "ideas"
-      ]
+      ],
+      "login": "phryneas",
+      "name": "Lenz Weber-Tronic",
+      "profile": "https://phryneas.de"
     },
     {
-      "login": "azat-io",
-      "name": "Azat S.",
       "avatar_url": "https://avatars.githubusercontent.com/u/5698350?v=4",
-      "profile": "http://azat.io",
       "contributions": [
         "bug",
         "code",
         "ideas"
-      ]
+      ],
+      "login": "azat-io",
+      "name": "Azat S.",
+      "profile": "http://azat.io"
     },
     {
+      "avatar_url": "https://avatars.githubusercontent.com/u/1174092?v=4",
+      "contributions": [
+        "bug",
+        "code"
+      ],
       "login": "franky47",
       "name": "François Best",
-      "avatar_url": "https://avatars.githubusercontent.com/u/1174092?v=4",
-      "profile": "https://francoisbest.com/",
-      "contributions": ["bug", "code"]
+      "profile": "https://francoisbest.com/"
     }
   ],
   "contributorsPerLine": 7,
@@ -55,6 +59,5 @@
   ],
   "projectName": "OctoGuide",
   "projectOwner": "JoshuaKGoldberg",
-  "repoType": "github",
-  "commitConvention": "angular"
+  "repoType": "github"
 }
