@@ -1,5 +1,3 @@
-import type { Rule } from "../types/rules.js";
-
 import { commentMeaningless } from "./commentMeaningless.js";
 import { prBranchNonDefault } from "./prBranchNonDefault.js";
 import { prLinkedIssue } from "./prLinkedIssue.js";
@@ -7,7 +5,7 @@ import { prTaskCompletion } from "./prTaskCompletion.js";
 import { prTitleConventional } from "./prTitleConventional.js";
 import { textImageAltText } from "./textImageAltText.js";
 
-export const rules: Rule[] = [
+export const allRules = [
 	commentMeaningless,
 	prBranchNonDefault,
 	prLinkedIssue,

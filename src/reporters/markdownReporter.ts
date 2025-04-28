@@ -1,4 +1,4 @@
-import type { RuleReport } from "../types/rules.js";
+import type { RuleReport } from "../types/reports.js";
 
 import { groupBy } from "../action/groupBy.js";
 import { Entity } from "../types/entities.js";
@@ -9,7 +9,7 @@ export function markdownReporter(entity: Entity, reports: RuleReport[]) {
 
 	const printedReports = Object.values(byRule).map((ruleReports) => {
 		const { about } = ruleReports[0];
-		const start = `[[**${about.name}**](https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/${about.name}.md)]`;
+		const start = `[[**${about.name}**](${about.url})]`;
 
 		if (ruleReports.length > 1) {
 			return [
