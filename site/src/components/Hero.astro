@@ -73,7 +73,11 @@ import OctoGuideGitHubComment from "./OctoGuideGitHubComment.astro";
 <style>
 	#hero {
 		--hero-vertical-padding: clamp(0rem, 3.5vh, 2rem);
-		background: radial-gradient(circle at 50% 20%, #ffffff, #ecf6f3);
+		background: radial-gradient(
+			circle at 50% 20%,
+			var(--color-gradient-center),
+			var(--color-gradient-outer)
+		);
 		height: 100%;
 		padding-top: calc(var(--hero-vertical-padding) + 2rem);
 		position: relative;
