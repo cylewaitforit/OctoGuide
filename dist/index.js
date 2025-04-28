@@ -95188,7 +95188,7 @@ const commentMeaningless = defineRule({
 
 const prBranchNonDefault = defineRule({
     about: {
-        config: "strict",
+        config: "recommended",
         description: "PRs should not be sent from their head repository's default branch.",
         explanation: [
             `Sending a PR from a repository's default branch, commonly \`main\`, means that repository will have a hard time pulling in updates from the upstream repository.`,

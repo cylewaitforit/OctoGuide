@@ -2,7 +2,7 @@ import { defineRule } from "./defineRule.js";
 
 export const prBranchNonDefault = defineRule({
 	about: {
-		config: "strict",
+		config: "recommended",
 		description:
 			"PRs should not be sent from their head repository's default branch.",
 		explanation: [
