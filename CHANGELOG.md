@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.9.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.4...0.9.0) (2025-04-28)
+
+### Features
+
+- add actions job summary ([#76](https://github.com/JoshuaKGoldberg/OctoGuide/issues/76)) ([4a912ee](https://github.com/JoshuaKGoldberg/OctoGuide/commit/4a912eecaf4ba379fd2790b96cedffb96dc1bcff)), closes [#71](https://github.com/JoshuaKGoldberg/OctoGuide/issues/71)
+
 ## [0.8.4](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.3...0.8.4) (2025-04-28)
 
 ### Bug Fixes
