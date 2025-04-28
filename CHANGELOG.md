@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.4](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.3...0.8.4) (2025-04-28)
+
+### Bug Fixes
+
+- don't include .md in rule docs links ([2860e4d](https://github.com/JoshuaKGoldberg/OctoGuide/commit/2860e4d7c10b9348c2f4a374752789ca77a8c2bb))
+
 ## [0.8.3](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.2...0.8.3) (2025-04-28)
 
 ### Bug Fixes
