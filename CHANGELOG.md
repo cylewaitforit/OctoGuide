@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.1](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.0...0.8.1) (2025-04-28)
+
+### Bug Fixes
+
+- enable pr-branch-non-default in recommended ([26fb60b](https://github.com/JoshuaKGoldberg/OctoGuide/commit/26fb60b3de01d188078b407370a10d1da1ac06df))
+
 # [0.8.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.7.0...0.8.0) (2025-04-28)
 
 ### Features
