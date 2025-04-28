@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.3](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.2...0.8.3) (2025-04-28)
+
+### Bug Fixes
+
+- use proper PullRequestActor when fetching PR data ([#68](https://github.com/JoshuaKGoldberg/OctoGuide/issues/68)) ([8ecd055](https://github.com/JoshuaKGoldberg/OctoGuide/commit/8ecd055fad04cf5ef300c4abcba8568d55d7d81f)), closes [#67](https://github.com/JoshuaKGoldberg/OctoGuide/issues/67) [#43](https://github.com/JoshuaKGoldberg/OctoGuide/issues/43)
+
 ## [0.8.2](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.8.1...0.8.2) (2025-04-28)
 
 ### Bug Fixes
