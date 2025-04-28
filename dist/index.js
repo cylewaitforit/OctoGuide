@@ -94758,7 +94758,7 @@ class DiscussionActorBase extends EntityActorBase {
         // https://github.com/JoshuaKGoldberg/OctoGuide/issues/34
         const response = await this.octokit.request("GET /repos/{owner}/{repo}/discussions/{discussion_number}/comments", {
             discussion_number: this.entityNumber,
-            owner: this.locator.owner,}
+            owner: this.locator.owner,
             repo: this.locator.repository,
         });
         return response.data;
@@ -94767,7 +94767,7 @@ class DiscussionActorBase extends EntityActorBase {
         const comments = await this.listComments();
         const nodeId = comments.find((comment) => comment.id === number)?.node_id;
         if (!nodeId) {
-            throw new Error(`Comment with ID ${number.toString()} not found`);
+            throw new Error(`Comment with ID ${number} not found`);
         }
         await this.octokit.graphql(`
 				mutation($body: String!, $commentId: ID!) {
@@ -94863,7 +94863,7 @@ class DiscussionCommentActor extends DiscussionActorBase {
         const threadComment = data.parent_id
             ? await this.getComment(data.parent_id)
             : data;
-        return await this.createCommentResponse(body, threadComment.node_}
+        return await this.createCommentResponse(body, threadComment.node_id);
     }
     async getData() {
         return await this.getComment(this.metadata.commentNumber);
@@ -94872,7 +94872,7 @@ class DiscussionCommentActor extends DiscussionActorBase {
         const comments = await this.listComments();
         const comment = comments.find((comment) => comment.id === number);
         if (!comment) {
-            throw new Error(`Could not find comment with number: ${number.toString()}`);
+            throw new Error(`Could not find comment with number: ${number}`);
         }
         return comment;
     }
@@ -95176,7 +95176,7 @@ function createDefineRule(createUrl) {
 
 ;// CONCATENATED MODULE: ./src/rules/defineRule.ts
 
-const defineRule = createDefineRule((about) => `https://octo.guide/rules/${about.name}.md`);
+const defineRule = createDefineRule((about) => `https://octo.guide/rules/${about.name}`);
 
 ;// CONCATENATED MODULE: ./src/rules/commentMeaningless.ts
 
@@ -96316,7 +96316,7 @@ function createCommentBody(entity, message) {
 
 
 async function createNewCommentForReports(actor, entity, reports) {
-    const targetNumber = entity.type === "comment" ? entity.parentNumber : en}
+    const targetNumber = entity.type === "comment" ? entity.parentNumber : entity.number;
     core.info(`Target number for comment creation: ${targetNumber.toString()}`);
     return await actor.createComment(createCommentBody(entity, markdownReporter(entity, reports)));
 }
@@ -96357,7 +96357,7 @@ async function getCommentForReports(actor, entity, reports) {
         core.info("Updating existing comment for reports.");
         await updateExistingCommentForReports(actor, entity, existingComment, reports);
         return { status: "existing", url: existingComment.html_url };
-    }}
+    }
     core.info("Creating existing comment for reports.");
     const newCommentUrl = await createNewCommentForReports(actor, entity, reports);
     core.info(`Created new comment: ${newCommentUrl}`);
@@ -96404,7 +96404,7 @@ async function runCommentCleanup({ auth, payload, url, }) {
         });
     }
     else {
-        core.info(`Deleting issue-like comment with id: ${existingComment.id.toString()}`);
+        core.info(`Deleting issue-like comment with id: ${existingComment.id}`);
         await octokit.rest.issues.deleteComment({
             comment_id: existingComment.id,
             owner: locator.owner,
@@ -96457,7 +96457,7 @@ async function runOctoGuideAction(context) {
         entity: url,
     });
     if (reports.length) {
-        core.info(`Found ${reports.length.toString()} report(s).`);
+        core.info(`Found ${reports.length} report(s).`);
         console.log(cliReporter(reports));
     }
     else {
@@ -96476,7 +96476,7 @@ async function runOctoGuideAction(context) {
 /***/ ((module) => {
 
 module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
-}
+
 /***/ }),
 
 /***/ 290:
@@ -96529,7 +96529,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("events");
 /***/ }),
 
 /***/ 9896:
-/***/ ((module) => {}
+/***/ ((module) => {
 
 module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
 
