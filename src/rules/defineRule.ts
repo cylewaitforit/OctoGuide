@@ -1,7 +1,6 @@
-import { createDefineRule } from "../createDefineRule";
-import { CoreRuleMetadata } from "../types/core";
+import { createDefineRule } from "../createDefineRule.js";
+import { CoreRuleMetadata } from "../types/core.js";
 
 export const defineRule = createDefineRule<CoreRuleMetadata>(
-	(about) =>
-		`https://github.com/JoshuaKGoldberg/OctoGuide/blob/main/docs/rules/${about.name}.md`,
+	(about) => `https://octo.guide/rules/${about.name}.md`,
 );
