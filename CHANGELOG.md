@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.10.4](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.3...0.10.4) (2025-04-29)
+
+### Bug Fixes
+
+- don't run core.debug() in CLI unless isDebug() ([6ede0ec](https://github.com/JoshuaKGoldberg/OctoGuide/commit/6ede0ecc8e6c1efbd79b0303358b2df0a43ea28c))
+
 ## [0.10.3](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.2...0.10.3) (2025-04-29)
 
 ### Bug Fixes
