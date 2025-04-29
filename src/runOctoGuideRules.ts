@@ -79,7 +79,10 @@ export async function runOctoGuideRules({
 		data: await actor.getData(),
 		...actor.metadata,
 	} as Entity;
-	core.debug(`Full entity: ${JSON.stringify(entity, null, 2)}`);
+
+	if (core.isDebug()) {
+		core.debug(`Full entity: ${JSON.stringify(entity, null, 2)}`);
+	}
 
 	const reports: RuleReport[] = [];
 
