@@ -18,7 +18,7 @@ jobs:
     if: ${{ !endsWith(github.actor, '[bot]') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: JoshuaKGoldberg/octoguide@v0.10.0
+      - uses: JoshuaKGoldberg/octoguide@0.10.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,7 +64,7 @@ jobs:
     if: ${{ !endsWith(github.actor, '[bot]') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: JoshuaKGoldberg/octoguide@v0.8.0
+      - uses: JoshuaKGoldberg/octoguide@0.10.0
         with:
 +          config: strict
           github-token: ${{ secrets.GITHUB_TOKEN }}
