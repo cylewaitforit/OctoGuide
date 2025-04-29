@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.10.2](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.1...0.10.2) (2025-04-29)
+
+### Bug Fixes
+
+- **pr-task-completion:** quote missing tasks ([#93](https://github.com/JoshuaKGoldberg/OctoGuide/issues/93)) ([ce80e62](https://github.com/JoshuaKGoldberg/OctoGuide/commit/ce80e620cc5df35b3539f6bf9447a20b26f9040a)), closes [#92](https://github.com/JoshuaKGoldberg/OctoGuide/issues/92)
+
 ## [0.10.1](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.0...0.10.1) (2025-04-29)
 
 ### Bug Fixes
