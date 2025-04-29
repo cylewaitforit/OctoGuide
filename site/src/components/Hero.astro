@@ -119,7 +119,8 @@ import OctoGuideGitHubComment from "./OctoGuideGitHubComment.astro";
 	.buttons {
 		align-items: center;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
 		gap: 1.5rem;
 		justify-content: center;
 		margin: 1.5rem;
@@ -144,10 +145,6 @@ import OctoGuideGitHubComment from "./OctoGuideGitHubComment.astro";
 	@media (width >= 1024px) {
 		#hero {
 			--hero-vertical-padding: clamp(0rem, 7vh, 4rem);
-		}
-
-		.buttons {
-			flex-direction: row;
 		}
 	}
 </style>
