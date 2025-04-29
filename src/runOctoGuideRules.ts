@@ -28,7 +28,8 @@ export interface RunOctoGuideRulesOptions {
 
 	/**
 	 * URL of the GitHub entity to scan.
-	 * @todo Support passing in the entity itself.
+	 * @todo Support passing in the entity itself:
+	 * https://github.com/JoshuaKGoldberg/OctoGuide/issues/85
 	 */
 	entity: string;
 }
@@ -64,9 +65,10 @@ export async function runOctoGuideRules({
 	// TODO: There's no need to create a full *writing* actor here;
 	// runOctoGuide only reads entities and runs rules on them.
 	// This area of authentication and actor resolution should split into:
-	// 1. Entity data & type resolution: read-only
+	// 1. Entity data & type resolution: read-only allowed
 	// 2. Using that to create the equivalent actor: requires writing
 	// ...where only 1. is needed for runOctoGuide.
+	// https://github.com/JoshuaKGoldberg/OctoGuide/issues/56
 	const octokit = await octokitFromAuth({ auth });
 	const { actor, locator } = createActor(octokit, url);
 	if (!actor) {
