@@ -85201,7 +85201,7 @@ function wrappy (fn, cb) {
 __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2819);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _runOctoGuideAction_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(9394);
+/* harmony import */ var _runOctoGuideAction_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(4122);
 
 
 await (0,_runOctoGuideAction_js__WEBPACK_IMPORTED_MODULE_1__/* .runOctoGuideAction */ .t)(_actions_github__WEBPACK_IMPORTED_MODULE_0__.context);
@@ -85211,7 +85211,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 9394:
+/***/ 4122:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -85892,27 +85892,21 @@ var lodash_default = /*#__PURE__*/__nccwpck_require__.n(lodash);
 const { groupBy } = (lodash_default());
 
 
-;// CONCATENATED MODULE: ./src/reporters/formatSecondary.ts
-function formatSecondary(secondary) {
-    return (secondary ?? []).flatMap((line) => line.split("\n"));
-}
-
-;// CONCATENATED MODULE: ./src/reporters/formatReport.ts
-
-function formatReport(report, explanation) {
-    const secondaryLines = formatSecondary(report.data.secondary);
-    return [
-        report.data.primary,
-        secondaryLines.length > 0
-            ? /^\w/.test(secondaryLines[0])
-                ? " "
-                : "\n\n"
-            : "",
-        secondaryLines.join("\n"),
-        /^\w/.test(secondaryLines[secondaryLines.length - 1]) ? " " : "\n\n",
+;// CONCATENATED MODULE: ./src/reporters/formatReportAsMarkdown.ts
+function formatReportAsMarkdown(report, explanation) {
+    const secondaryLines = (report.data.secondary ?? []).flatMap((line) => line.split("\n"));
+    const middle = secondaryLines.length
+        ? [
+            /^\w/.test(secondaryLines[0]) ? " " : "\n\n",
+            secondaryLines.join("\n"),
+            /^\w/.test(secondaryLines[secondaryLines.length - 1]) ? " " : "\n\n",
+        ]
+        : [" "];
+    const suffix = [
         explanation ? `${explanation.join(" ")} ` : "",
         report.data.suggestion.join("\n"),
-    ].join("");
+    ];
+    return [report.data.primary, ...middle, ...suffix].join("");
 }
 
 ;// CONCATENATED MODULE: ./src/reporters/cliReporter.ts
@@ -85937,13 +85931,15 @@ function cliReporter(reports) {
             lines.push([
                 about.explanation.join(" "),
                 "\n\n",
-                ruleReports.map((report) => formatReport(report)).join("\n\n"),
+                ruleReports
+                    .map((report) => formatReportAsMarkdown(report))
+                    .join("\n\n"),
             ].join(""));
         }
         else {
             lines.push([
                 ruleReports
-                    .map((report) => formatReport(report, about.explanation))
+                    .map((report) => formatReportAsMarkdown(report, about.explanation))
                     .join("\n\n"),
             ].join(""));
         }
@@ -85971,18 +85967,20 @@ function markdownReporter(headline, reports) {
                 " ",
                 about.explanation.join(" "),
                 "\n\n",
-                ruleReports.map((report) => formatReport(report)).join("\n\n"),
+                ruleReports
+                    .map((report) => formatReportAsMarkdown(report))
+                    .join("\n\n"),
             ].join("");
         }
         return [
             start,
             " ",
             ruleReports
-                .map((report) => formatReport(report, about.explanation))
+                .map((report) => formatReportAsMarkdown(report, about.explanation))
                 .join("\n\n"),
         ].join("");
     });
-    return [headline, printedReports.join("\n\n")].join("");
+    return [headline, "\n\n", printedReports.join("\n\n")].join("");
 }
 
 ;// CONCATENATED MODULE: external "node:child_process"
@@ -95200,6 +95198,75 @@ const commentMeaningless = defineRule({
     },
 });
 
+;// CONCATENATED MODULE: ./src/types/utils.ts
+async function wrapSafe(task) {
+    try {
+        return await task;
+    }
+    catch {
+        return undefined;
+    }
+}
+
+;// CONCATENATED MODULE: ./src/rules/prBodyNotEmpty.ts
+
+
+const prBodyNotEmpty = defineRule({
+    about: {
+        config: "recommended",
+        description: "PRs should have a description beyond the template.",
+        explanation: [
+            `This repository expects pull requests to include a description explaining the changes.`,
+            `The description should have at least one word not in the PR template, or any content if no template exists.`,
+        ],
+        name: "pr-body-not-empty",
+    },
+    async pullRequest(context, entity) {
+        if (!entity.data.body) {
+            context.report({
+                primary: "This PR doesn't have a description.",
+                suggestion: [
+                    "Please add a description explaining the purpose and changes in this PR.",
+                ],
+            });
+            return;
+        }
+        const templateResponse = await wrapSafe(context.octokit.rest.repos.getContent({
+            owner: context.locator.owner,
+            path: ".github/PULL_REQUEST_TEMPLATE.md",
+            repo: context.locator.repository,
+        }));
+        if (!templateResponse ||
+            Array.isArray(templateResponse.data) ||
+            templateResponse.data.type !== "file") {
+            if (entity.data.body
+                .trim()
+                .split(/\s+/)
+                .filter((word) => word.length > 0).length === 0) {
+                context.report({
+                    primary: "This PR's description doesn't contain any words.",
+                    suggestion: [
+                        "Please add at least a brief explanation of the changes.",
+                    ],
+                });
+            }
+            return;
+        }
+        const template = Buffer.from(templateResponse.data.content, "base64").toString("utf-8");
+        const templateWords = new Set(template.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []);
+        const bodyWords = entity.data.body.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [];
+        const uniqueWords = bodyWords.filter((word) => !templateWords.has(word));
+        if (uniqueWords.length === 0) {
+            context.report({
+                primary: "This PR's description doesn't contain any content beyond the template.",
+                suggestion: [
+                    "Please add a description explaining the purpose and changes in this PR.",
+                ],
+            });
+        }
+    },
+});
+
 ;// CONCATENATED MODULE: ./src/rules/prBranchNonDefault.ts
 
 const prBranchNonDefault = defineRule({
@@ -95279,16 +95346,6 @@ const prLinkedIssue = defineRule({
     },
 });
 
-;// CONCATENATED MODULE: ./src/types/utils.ts
-async function wrapSafe(task) {
-    try {
-        return await task;
-    }
-    catch {
-        return undefined;
-    }
-}
-
 ;// CONCATENATED MODULE: ./src/rules/prTaskCompletion.ts
 
 
@@ -95340,7 +95397,7 @@ const prTaskCompletion = defineRule({
         }
         context.report({
             primary: "This PR's body is missing [x] checks on the following tasks from the PR template.",
-            secondary: missingTasks,
+            secondary: missingTasks.map((task) => `> ${task}`),
             suggestion: [
                 "Please complete those tasks and mark the checks as [x] completed.",
             ],
@@ -96219,9 +96276,11 @@ const ruleDescriptions = {
 
 
 
+
 const allRules = [
     commentMeaningless,
     prBranchNonDefault,
+    prBodyNotEmpty,
     prLinkedIssue,
     prTaskCompletion,
     prTitleConventional,
@@ -96251,9 +96310,10 @@ async function runOctoGuideRules({ auth, config = "recommended", entity: url, })
     // TODO: There's no need to create a full *writing* actor here;
     // runOctoGuide only reads entities and runs rules on them.
     // This area of authentication and actor resolution should split into:
-    // 1. Entity data & type resolution: read-only
+    // 1. Entity data & type resolution: read-only allowed
     // 2. Using that to create the equivalent actor: requires writing
     // ...where only 1. is needed for runOctoGuide.
+    // https://github.com/JoshuaKGoldberg/OctoGuide/issues/56
     const octokit = await octokitFromAuth({ auth });
     const { actor, locator } = createActor(octokit, url);
     if (!actor) {
@@ -98876,7 +98936,7 @@ const lexer = _Lexer.lex;
 async function actionReporter(headline, reports, summary) {
     const byRule = groupBy(reports, (report) => report.about.name);
     summary.addHeading("OctoGuide Report", 1);
-    summary.addRaw(headline);
+    summary.addRaw(headline + "\n\n");
     for (const ruleReports of Object.values(byRule)) {
         const { about } = ruleReports[0];
         summary.addHeading(`<a href="${about.url}">${about.name}</a>`, 2);
@@ -98893,8 +98953,8 @@ async function actionReporter(headline, reports, summary) {
     summary.addRaw(`🗺️ <em>This message was posted automatically by <a href="https://github.com/JoshuaKGoldberg/OctoGuide">OctoGuide</a>: a bot for GitHub repository best practices.</em>`);
 }
 
-;// CONCATENATED MODULE: ./src/reporters/createHeadline.ts
-function createHeadline(entity, reports) {
+;// CONCATENATED MODULE: ./src/reporters/createHeadlineAsMarkdown.ts
+function createHeadlineAsMarkdown(entity, reports) {
     const entityAlias = entity.type.replace("_", " ");
     const entityText = entity.type === "comment"
         ? `[${entityAlias}](${entity.data.html_url} "comment ${entity.data.id.toString()} reported by OctoGuide")`
@@ -98906,7 +98966,7 @@ function createHeadline(entity, reports) {
         entityText,
         "! A scan flagged ",
         reports.length > 1 ? "some concerns" : "a concern",
-        " with it. Could you please take a look?\n\n",
+        " with it. Could you please take a look?",
     ].join("");
 }
 
@@ -98962,7 +99022,7 @@ async function updateExistingCommentForReports(actor, entity, existingComment, r
 
 
 
-async function getCommentForReports(actor, entity, reported) {
+async function setCommentForReports(actor, entity, reported) {
     const existingComment = await getExistingComment(actor, entity.data.html_url);
     core.info(existingComment
         ? `Found existing comment: ${existingComment.html_url}`
@@ -98996,10 +99056,10 @@ async function getCommentForReports(actor, entity, reported) {
 
 
 async function outputActionReports(actor, entity, reports) {
-    const headline = createHeadline(entity, reports);
+    const headline = createHeadlineAsMarkdown(entity, reports);
     const reported = markdownReporter(headline, reports);
     try {
-        const comment = await getCommentForReports(actor, entity, reported);
+        const comment = await setCommentForReports(actor, entity, reported);
         core.info(comment
             ? `Reports comment: ${comment.url} (${comment.status})`
             : "No comment created.");
@@ -99015,9 +99075,11 @@ async function outputActionReports(actor, entity, reports) {
             console.error(error);
         }
     }
-    await actionReporter(headline, reports, core.summary);
-    await core.summary.write();
-    core.setFailed(headline);
+    if (reports.length) {
+        await actionReporter(headline, reports, core.summary);
+        await core.summary.write();
+        core.setFailed(headline);
+    }
 }
 
 ;// CONCATENATED MODULE: ./src/action/runCommentCleanup.ts
