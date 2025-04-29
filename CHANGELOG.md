@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.10.1](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.0...0.10.1) (2025-04-29)
+
+### Bug Fixes
+
+- don't fail actions or write a summary on pass ([#89](https://github.com/JoshuaKGoldberg/OctoGuide/issues/89)) ([40c9430](https://github.com/JoshuaKGoldberg/OctoGuide/commit/40c943097263078ebc5668de3f4587cc0b7534e2)), closes [#88](https://github.com/JoshuaKGoldberg/OctoGuide/issues/88)
+
 # [0.10.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.9.0...0.10.0) (2025-04-28)
 
 ### Features
