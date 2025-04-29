@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.10.3](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.2...0.10.3) (2025-04-29)
+
+### Bug Fixes
+
+- re-run pnpm build:release ([7ee01e2](https://github.com/JoshuaKGoldberg/OctoGuide/commit/7ee01e22d53a1630ec5829f2c89c05789d062f44))
+
 ## [0.10.2](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.1...0.10.2) (2025-04-29)
 
 ### Bug Fixes
