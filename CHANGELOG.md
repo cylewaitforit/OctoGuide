@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.11.1](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.11.0...0.11.1) (2025-05-01)
+
+### Bug Fixes
+
+- properly parse headline for GHA summary ([#105](https://github.com/JoshuaKGoldberg/OctoGuide/issues/105)) ([9ed3f43](https://github.com/JoshuaKGoldberg/OctoGuide/commit/9ed3f433b34fe269fab2241c36a9e71d663feba4)), closes [#104](https://github.com/JoshuaKGoldberg/OctoGuide/issues/104)
+
 # [0.11.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.6...0.11.0) (2025-05-01)
 
 ### Features
