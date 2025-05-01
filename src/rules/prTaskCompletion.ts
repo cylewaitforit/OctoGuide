@@ -5,7 +5,7 @@ export const prTaskCompletion = defineRule({
 	about: {
 		config: "recommended",
 		description:
-			"Tasks lists from the pull request template should be [x] filled out.",
+			"Tasks lists from the pull request template should be `[x]` filled out.",
 		explanation: [
 			`Repositories often provide a set of tasks that pull request authors are expected to complete.`,
 			`Those tasks should be marked as completed with a \`[x]\` in the pull request description.`,
@@ -45,7 +45,7 @@ export const prTaskCompletion = defineRule({
 				primary:
 					"This PR's body is empty, but there is a template with tasks to be done.",
 				suggestion: [
-					"Please fill out the pull request template and make sure all the tasks are [x] checked.",
+					"Please fill out the pull request template and make sure all the tasks are `[x]` checked.",
 				],
 			});
 			return;
@@ -72,10 +72,10 @@ export const prTaskCompletion = defineRule({
 
 		context.report({
 			primary:
-				"This PR's body is missing [x] checks on the following tasks from the PR template.",
+				"This PR's body is missing `[x]` checks on the following tasks from the PR template.",
 			secondary: missingTasks.map((task) => `> ${task}`),
 			suggestion: [
-				"Please complete those tasks and mark the checks as [x] completed.",
+				"Please complete those tasks and mark the checks as `[x]` completed.",
 			],
 		});
 	},
