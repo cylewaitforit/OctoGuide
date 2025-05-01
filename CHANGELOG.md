@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.10.6](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.5...0.10.6) (2025-05-01)
+
+### Bug Fixes
+
+- normalize reports formatting for backticks and underscores ([54fef6e](https://github.com/JoshuaKGoldberg/OctoGuide/commit/54fef6e02f4cd8e78676bd2651f48b0fdcd33c1c))
+
 ## [0.10.5](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.4...0.10.5) (2025-04-30)
 
 ### Bug Fixes
