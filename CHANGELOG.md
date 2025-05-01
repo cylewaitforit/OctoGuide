@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.11.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.6...0.11.0) (2025-05-01)
+
+### Features
+
+- allow process.env.GITHUB_TOKEN in action ([#103](https://github.com/JoshuaKGoldberg/OctoGuide/issues/103)) ([2ecd478](https://github.com/JoshuaKGoldberg/OctoGuide/commit/2ecd478cd5ec2d7cf32e8039f87396ff053a6455)), closes [#102](https://github.com/JoshuaKGoldberg/OctoGuide/issues/102)
+
 ## [0.10.6](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.10.5...0.10.6) (2025-05-01)
 
 ### Bug Fixes
