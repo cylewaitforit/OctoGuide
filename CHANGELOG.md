@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.11.3](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.11.2...0.11.3) (2025-06-02)
+
+### Bug Fixes
+
+- **deps:** update dependency @octokit/plugin-rest-endpoint-methods to v16 ([#142](https://github.com/JoshuaKGoldberg/OctoGuide/issues/142)) ([c5fe16b](https://github.com/JoshuaKGoldberg/OctoGuide/commit/c5fe16b669024114592d3c95555a9af3a77d6283))
+
 ## [0.11.2](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.11.1...0.11.2) (2025-05-27)
 
 ### Bug Fixes
