@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 import type { EntityActor } from "../../actors/types.js";
+import type { CommentConfig } from "../../types/commentConfig.js";
 import type { CommentEntity, DiscussionEntity } from "../../types/entities.js";
 
 import { createCommentBody } from "./createCommentBody.js";
@@ -23,9 +24,12 @@ const entityActor = {
 	createComment: mockCreateComment,
 } as unknown as EntityActor;
 
-describe(createNewCommentForReports, () => {
-	const commentFooter = "Test footer";
+const commentConfig = {
+	footer: "Test footer",
+	header: "Test header",
+} as CommentConfig;
 
+describe(createNewCommentForReports, () => {
 	it("targets the parent number when the entity is a comment", async () => {
 		const parentNumber = 123;
 
@@ -41,11 +45,11 @@ describe(createNewCommentForReports, () => {
 			entityActor,
 			entity,
 			reported,
-			commentFooter,
+			commentConfig,
 		);
 
 		expect(mockCreateComment).toHaveBeenCalledWith(
-			createCommentBody(entity, reported, commentFooter),
+			createCommentBody(entity, reported, commentConfig),
 		);
 		expect(mockCore.info).toHaveBeenCalledWith(
 			`Target number for comment creation: ${parentNumber.toString()}`,
@@ -67,11 +71,11 @@ describe(createNewCommentForReports, () => {
 			entityActor,
 			entity,
 			reported,
-			commentFooter,
+			commentConfig,
 		);
 
 		expect(mockCreateComment).toHaveBeenCalledWith(
-			createCommentBody(entity, reported, commentFooter),
+			createCommentBody(entity, reported, commentConfig),
 		);
 		expect(mockCore.info).toHaveBeenCalledWith(
 			`Target number for comment creation: ${number.toString()}`,
