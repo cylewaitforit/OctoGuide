@@ -27,7 +27,7 @@ const entityActor = {
 const commentConfig = {
 	footer: "Test footer",
 	header: "Test header",
-} as CommentConfig;
+} satisfies CommentConfig;
 
 describe(createNewCommentForReports, () => {
 	it("targets the parent number when the entity is a comment", async () => {
