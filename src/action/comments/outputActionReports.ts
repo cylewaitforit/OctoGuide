@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 
 import type { EntityActor } from "../../actors/types.js";
+import type { CommentConfig } from "../../types/commentConfig.js";
 import type { Entity } from "../../types/entities.js";
 import type { RuleReport } from "../../types/reports.js";
 
@@ -14,7 +15,7 @@ export async function outputActionReports(
 	actor: EntityActor,
 	entity: Entity,
 	reports: RuleReport[],
-	commentFooter: string,
+	commentConfig: CommentConfig,
 ) {
 	const headline = createHeadlineAsMarkdown(entity, reports);
 	const reported = markdownReporter(headline, reports);
@@ -24,7 +25,7 @@ export async function outputActionReports(
 			actor,
 			entity,
 			reported,
-			commentFooter,
+			commentConfig,
 		);
 
 		core.info(

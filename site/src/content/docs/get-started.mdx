@@ -7,6 +7,7 @@ import { Code } from "@astrojs/starlight/components";
 import {
 	getStartedBase,
 	getStartedStrict,
+	getStartedHeader,
 	getStartedFooter,
 } from "../../data/yml.js";
 
@@ -61,6 +62,21 @@ For public repositories that's the following permissions:
 
 - `repo` > `public_repo`
 - `read:discussion`
+
+### `comment-header`
+
+You can customize the header message that OctoGuide adds to its comments by providing a `comment-header` input as a string.
+
+**Example:**
+
+<Code
+	code={getStartedHeader}
+	meta="lang=yml"
+	lang="diff"
+	title=".github/workflows/octoguide.yml"
+/>
+
+If no custom header is provided, OctoGuide uses its default message.
 
 ### `comment-footer`
 

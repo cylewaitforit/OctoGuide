@@ -48,9 +48,14 @@ export async function runOctoGuideAction(context: typeof github.context) {
 		throw new Error(`Unknown config provided: ${config}`);
 	}
 
-	const commentFooter =
-		core.getInput("comment-footer") ||
-		"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.";
+	const commentConfig = {
+		footer:
+			core.getInput("comment-footer") ||
+			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+		header:
+			core.getInput("comment-header") ||
+			"Hey! You! Listen! This is a bot message from Octoguide! 🐙",
+	};
 
 	const { actor, entity, reports } = await runOctoGuideRules({
 		auth,
@@ -65,5 +70,5 @@ export async function runOctoGuideAction(context: typeof github.context) {
 		core.info("Found 0 reports. Great! ✅");
 	}
 
-	await outputActionReports(actor, entity, reports, commentFooter);
+	await outputActionReports(actor, entity, reports, commentConfig);
 }

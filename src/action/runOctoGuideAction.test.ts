@@ -270,7 +270,11 @@ describe("runOctoGuideAction", () => {
 				data: { html_url: "https://github.com/test" },
 			}),
 			reports,
-			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+			expect.objectContaining({
+				footer:
+					"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+				header: "Hey! You! Listen! This is a bot message from Octoguide! 🐙",
+			}),
 		);
 	});
 
@@ -286,7 +290,11 @@ describe("runOctoGuideAction", () => {
 				data: { html_url: "https://github.com/test" },
 			}),
 			[],
-			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+			expect.objectContaining({
+				footer:
+					"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+				header: "Hey! You! Listen! This is a bot message from Octoguide! 🐙",
+			}),
 		);
 	});
 
@@ -378,7 +386,10 @@ describe("runOctoGuideAction", () => {
 				data: { html_url: "https://github.com/test" },
 			}),
 			expect.anything(),
-			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+			expect.objectContaining({
+				footer:
+					"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+			}),
 		);
 	});
 
@@ -394,7 +405,9 @@ describe("runOctoGuideAction", () => {
 				data: { html_url: "https://github.com/test" },
 			}),
 			expect.anything(),
-			"Custom footer message!",
+			expect.objectContaining({
+				footer: "Custom footer message!",
+			}),
 		);
 	});
 });
