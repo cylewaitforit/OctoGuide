@@ -8,9 +8,10 @@ export async function updateExistingCommentForReports(
 	entity: Entity,
 	existingComment: CommentData,
 	reported: string,
+	commentFooter: string,
 ) {
 	await actor.updateComment(
 		existingComment.id,
-		createCommentBody(entity, reported),
+		createCommentBody(entity, reported, commentFooter),
 	);
 }

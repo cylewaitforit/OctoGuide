@@ -2,10 +2,14 @@ import type { Entity } from "../../types/entities.js";
 
 import { createCommentIdentifier } from "./createCommentIdentifier.js";
 
-export function createCommentBody(entity: Entity, message: string): string {
+export function createCommentBody(
+	entity: Entity,
+	message: string,
+	footer: string,
+): string {
 	return [
 		message,
-		`> 🗺️ _This message was posted automatically by [OctoGuide](https://github.com/JoshuaKGoldberg/OctoGuide): a bot for GitHub repository best practices._`,
+		`> _${footer}_`,
 		createCommentIdentifier(entity.data.html_url),
 	].join("\n\n");
 }

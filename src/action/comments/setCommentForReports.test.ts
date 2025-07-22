@@ -65,6 +65,8 @@ const existingComment = {
 const reportFail = "Oh no!";
 
 describe(setCommentForReports, () => {
+	const commentFooter = "Test footer";
+
 	it("returns without setting anything when the report is a pass and there is no existing comment", async () => {
 		mockGetExistingComment.mockResolvedValueOnce(undefined);
 
@@ -72,6 +74,7 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			markdownReportPassMessage,
+			commentFooter,
 		);
 
 		expect(mockUpdateExistingCommentForReports).not.toHaveBeenCalled();
@@ -86,6 +89,7 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			markdownReportPassMessage,
+			commentFooter,
 		);
 
 		expect(mockUpdateExistingCommentForReports).toHaveBeenCalledWith(
@@ -93,6 +97,7 @@ describe(setCommentForReports, () => {
 			entity,
 			existingComment,
 			markdownReportPassMessage,
+			commentFooter,
 		);
 		expect(actual).toEqual({
 			status: "existing",
@@ -106,13 +111,19 @@ describe(setCommentForReports, () => {
 	it("updates the comment when the report is a fail and there is an existing comment", async () => {
 		mockGetExistingComment.mockResolvedValueOnce(existingComment);
 
-		const actual = await setCommentForReports(actor, entity, reportFail);
+		const actual = await setCommentForReports(
+			actor,
+			entity,
+			reportFail,
+			commentFooter,
+		);
 
 		expect(mockUpdateExistingCommentForReports).toHaveBeenCalledWith(
 			actor,
 			entity,
 			existingComment,
 			reportFail,
+			commentFooter,
 		);
 		expect(actual).toEqual({
 			status: "existing",
@@ -128,12 +139,18 @@ describe(setCommentForReports, () => {
 		mockGetExistingComment.mockResolvedValueOnce(undefined);
 		mockCreateNewCommentForReports.mockResolvedValueOnce(newCommentUrl);
 
-		const actual = await setCommentForReports(actor, entity, reportFail);
+		const actual = await setCommentForReports(
+			actor,
+			entity,
+			reportFail,
+			commentFooter,
+		);
 
 		expect(mockCreateNewCommentForReports).toHaveBeenCalledWith(
 			actor,
 			entity,
 			reportFail,
+			commentFooter,
 		);
 		expect(actual).toEqual({
 			status: "created",

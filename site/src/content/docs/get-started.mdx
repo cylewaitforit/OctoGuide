@@ -4,7 +4,11 @@ title: Get Started
 
 import { Code } from "@astrojs/starlight/components";
 
-import { getStartedBase, getStartedStrict } from "../../data/yml.js";
+import {
+	getStartedBase,
+	getStartedStrict,
+	getStartedFooter,
+} from "../../data/yml.js";
 
 OctoGuide checks that contributor activity on your GitHub repository aligns with common expectations of smoothly-running projects.
 It will automatically post friendly comments when contributors take actions you don't want them to.
@@ -57,3 +61,18 @@ For public repositories that's the following permissions:
 
 - `repo` > `public_repo`
 - `read:discussion`
+
+### `comment-footer`
+
+You can customize the footer message that OctoGuide adds to its comments by providing a `comment-footer` input as a string.
+
+**Example:**
+
+<Code
+	code={getStartedFooter}
+	meta="lang=yml"
+	lang="diff"
+	title=".github/workflows/octoguide.yml"
+/>
+
+If no custom footer is provided, OctoGuide uses its default message.

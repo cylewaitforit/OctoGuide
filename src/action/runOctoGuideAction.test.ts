@@ -270,6 +270,7 @@ describe("runOctoGuideAction", () => {
 				data: { html_url: "https://github.com/test" },
 			}),
 			reports,
+			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
 		);
 	});
 
@@ -285,6 +286,7 @@ describe("runOctoGuideAction", () => {
 				data: { html_url: "https://github.com/test" },
 			}),
 			[],
+			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
 		);
 	});
 
@@ -363,5 +365,36 @@ describe("runOctoGuideAction", () => {
 			config: "recommended",
 			entity: "https://github.com/test",
 		});
+	});
+
+	it("should use the default footer comment when no footer is specified in config", async () => {
+		createMockActionInputs({});
+		createMinimalRuleExecution();
+		await runOctoGuideAction(createMockContext(createMockPayload()));
+
+		expect(mockOutputActionReports).toHaveBeenCalledWith(
+			expect.objectContaining({ metadata: { number: 1, type: "issue" } }),
+			expect.objectContaining({
+				data: { html_url: "https://github.com/test" },
+			}),
+			expect.anything(),
+			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+		);
+	});
+
+	it("should use the custom footer comment when specified in config", async () => {
+		createMockActionInputs({
+			"comment-footer": "Custom footer message!",
+		});
+		createMinimalRuleExecution();
+		await runOctoGuideAction(createMockContext(createMockPayload()));
+		expect(mockOutputActionReports).toHaveBeenCalledWith(
+			expect.objectContaining({ metadata: { number: 1, type: "issue" } }),
+			expect.objectContaining({
+				data: { html_url: "https://github.com/test" },
+			}),
+			expect.anything(),
+			"Custom footer message!",
+		);
 	});
 });

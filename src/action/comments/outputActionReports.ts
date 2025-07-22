@@ -14,12 +14,18 @@ export async function outputActionReports(
 	actor: EntityActor,
 	entity: Entity,
 	reports: RuleReport[],
+	commentFooter: string,
 ) {
 	const headline = createHeadlineAsMarkdown(entity, reports);
 	const reported = markdownReporter(headline, reports);
 
 	try {
-		const comment = await setCommentForReports(actor, entity, reported);
+		const comment = await setCommentForReports(
+			actor,
+			entity,
+			reported,
+			commentFooter,
+		);
 
 		core.info(
 			comment

@@ -17,6 +17,7 @@ export async function setCommentForReports(
 	actor: EntityActor,
 	entity: Entity,
 	reported: string,
+	commentFooter: string,
 ): Promise<ReportComment | undefined> {
 	const existingComment = await getExistingComment(actor, entity.data.html_url);
 
@@ -34,6 +35,7 @@ export async function setCommentForReports(
 				entity,
 				existingComment,
 				reported,
+				commentFooter,
 			);
 		}
 		return (
@@ -48,6 +50,7 @@ export async function setCommentForReports(
 			entity,
 			existingComment,
 			reported,
+			commentFooter,
 		);
 		return { status: "existing", url: existingComment.html_url };
 	}
@@ -57,6 +60,7 @@ export async function setCommentForReports(
 		actor,
 		entity,
 		reported,
+		commentFooter,
 	);
 	core.info(`Created new comment: ${newCommentUrl}`);
 

@@ -42,3 +42,11 @@ jobs:
         with:
 +          config: strict
           github-token: \${{ secrets.GITHUB_TOKEN }}`;
+
+export const getStartedFooter = `jobs:
+  octoguide:
+    steps:
+      - uses: JoshuaKGoldberg/octoguide@v0
+        with:
++          comment-footer: "🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices."
+          github-token: \${{ secrets.GITHUB_TOKEN }}`;

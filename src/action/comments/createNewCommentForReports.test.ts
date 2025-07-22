@@ -24,6 +24,8 @@ const entityActor = {
 } as unknown as EntityActor;
 
 describe(createNewCommentForReports, () => {
+	const commentFooter = "Test footer";
+
 	it("targets the parent number when the entity is a comment", async () => {
 		const parentNumber = 123;
 
@@ -35,10 +37,15 @@ describe(createNewCommentForReports, () => {
 			type: "comment",
 		} as CommentEntity;
 
-		await createNewCommentForReports(entityActor, entity, reported);
+		await createNewCommentForReports(
+			entityActor,
+			entity,
+			reported,
+			commentFooter,
+		);
 
 		expect(mockCreateComment).toHaveBeenCalledWith(
-			createCommentBody(entity, reported),
+			createCommentBody(entity, reported, commentFooter),
 		);
 		expect(mockCore.info).toHaveBeenCalledWith(
 			`Target number for comment creation: ${parentNumber.toString()}`,
@@ -56,10 +63,15 @@ describe(createNewCommentForReports, () => {
 			type: "discussion",
 		} as DiscussionEntity;
 
-		await createNewCommentForReports(entityActor, entity, reported);
+		await createNewCommentForReports(
+			entityActor,
+			entity,
+			reported,
+			commentFooter,
+		);
 
 		expect(mockCreateComment).toHaveBeenCalledWith(
-			createCommentBody(entity, reported),
+			createCommentBody(entity, reported, commentFooter),
 		);
 		expect(mockCore.info).toHaveBeenCalledWith(
 			`Target number for comment creation: ${number.toString()}`,
