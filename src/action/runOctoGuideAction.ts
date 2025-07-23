@@ -50,10 +50,11 @@ export async function runOctoGuideAction(context: typeof github.context) {
 
 	const settings = {
 		comments: {
-		  footer:
-			core.getInput("comment-footer") ||
-			"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
-		header: core.getInput("comment-header"),
+			footer:
+				core.getInput("comment-footer") ||
+				"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+			header: core.getInput("comment-header"),
+		},
 	};
 
 	const { actor, entity, reports } = await runOctoGuideRules({
@@ -69,5 +70,5 @@ export async function runOctoGuideAction(context: typeof github.context) {
 		core.info("Found 0 reports. Great! ✅");
 	}
 
-	await outputActionReports(actor, entity, reports, commentConfig);
+	await outputActionReports(actor, entity, reports, settings);
 }

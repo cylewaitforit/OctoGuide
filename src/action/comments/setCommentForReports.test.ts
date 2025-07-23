@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 
 import type { EntityActor } from "../../actors/types.js";
-import type { CommentConfig } from "../../types/commentConfig.js";
 import type { IssueEntity } from "../../types/entities.js";
+import type { Settings } from "../../types/settings.js";
 
 import { markdownReportPassMessage } from "../../reporters/markdownReporter.js";
 import { setCommentForReports } from "./setCommentForReports.js";
@@ -65,10 +65,12 @@ const existingComment = {
 
 const reportFail = "Oh no!";
 
-const commentConfig = {
-	footer: "Test footer",
-	header: "Test header",
-} as CommentConfig;
+const settings = {
+	comments: {
+		footer: "Test footer",
+		header: "Test header",
+	},
+} satisfies Settings;
 
 describe(setCommentForReports, () => {
 	it("returns without setting anything when the report is a pass and there is no existing comment", async () => {
@@ -78,7 +80,7 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			markdownReportPassMessage,
-			commentConfig,
+			settings,
 		);
 
 		expect(mockUpdateExistingCommentForReports).not.toHaveBeenCalled();
@@ -93,7 +95,7 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			markdownReportPassMessage,
-			commentConfig,
+			settings,
 		);
 
 		expect(mockUpdateExistingCommentForReports).toHaveBeenCalledWith(
@@ -101,7 +103,7 @@ describe(setCommentForReports, () => {
 			entity,
 			existingComment,
 			markdownReportPassMessage,
-			commentConfig,
+			settings,
 		);
 		expect(actual).toEqual({
 			status: "existing",
@@ -119,7 +121,7 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			reportFail,
-			commentConfig,
+			settings,
 		);
 
 		expect(mockUpdateExistingCommentForReports).toHaveBeenCalledWith(
@@ -127,7 +129,7 @@ describe(setCommentForReports, () => {
 			entity,
 			existingComment,
 			reportFail,
-			commentConfig,
+			settings,
 		);
 		expect(actual).toEqual({
 			status: "existing",
@@ -147,14 +149,14 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			reportFail,
-			commentConfig,
+			settings,
 		);
 
 		expect(mockCreateNewCommentForReports).toHaveBeenCalledWith(
 			actor,
 			entity,
 			reportFail,
-			commentConfig,
+			settings,
 		);
 		expect(actual).toEqual({
 			status: "created",

@@ -1,17 +1,19 @@
-import type { CommentConfig } from "../../types/commentConfig.js";
 import type { Entity } from "../../types/entities.js";
+import type { Settings } from "../../types/settings.js";
 
 import { createCommentIdentifier } from "./createCommentIdentifier.js";
 
 export function createCommentBody(
 	entity: Entity,
 	message: string,
-	commentConfig: CommentConfig,
+	settings: Settings,
 ): string {
 	return [
-		`## ${commentConfig.header}`,
+		settings.comments.header && `## ${settings.comments.header}`,
 		message,
-		`> _${commentConfig.footer}_`,
+		settings.comments.footer && `> _${settings.comments.footer}_`,
 		createCommentIdentifier(entity.data.html_url),
-	].join("\n\n");
+	]
+		.filter(Boolean)
+		.join("\n\n");
 }

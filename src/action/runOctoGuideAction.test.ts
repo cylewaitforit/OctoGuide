@@ -271,9 +271,11 @@ describe("runOctoGuideAction", () => {
 			}),
 			reports,
 			expect.objectContaining({
-				footer:
-					"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
-				header: "Hey! You! Listen! This is a bot message from Octoguide! 🐙",
+				comments: {
+					footer:
+						"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+					header: "",
+				},
 			}),
 		);
 	});
@@ -291,9 +293,11 @@ describe("runOctoGuideAction", () => {
 			}),
 			[],
 			expect.objectContaining({
-				footer:
-					"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
-				header: "Hey! You! Listen! This is a bot message from Octoguide! 🐙",
+				comments: {
+					footer:
+						"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+					header: "",
+				},
 			}),
 		);
 	});
@@ -387,8 +391,11 @@ describe("runOctoGuideAction", () => {
 			}),
 			expect.anything(),
 			expect.objectContaining({
-				footer:
-					"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+				comments: {
+					footer:
+						"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
+					header: "",
+				},
 			}),
 		);
 	});
@@ -406,7 +413,10 @@ describe("runOctoGuideAction", () => {
 			}),
 			expect.anything(),
 			expect.objectContaining({
-				footer: "Custom footer message!",
+				comments: {
+					footer: "Custom footer message!",
+					header: "",
+				},
 			}),
 		);
 	});
