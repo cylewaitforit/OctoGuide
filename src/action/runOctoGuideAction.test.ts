@@ -3,51 +3,65 @@ import type * as github from "@actions/github";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { EntityActor } from "../actors/types.js";
-import type { Entity } from "../types/entities.js";
+import type { RunOctoGuideRulesResult } from "../runOctoGuideRules.js";
+import type { CommentData, Entity, IssueEntity } from "../types/entities.js";
 import type { RuleReport } from "../types/reports.js";
 
 import { runOctoGuideAction } from "./runOctoGuideAction";
 
-// Test constants
 const TEST_GITHUB_URL = "https://github.com/test";
 const TEST_GITHUB_TOKEN = "mock-token";
 const DEFAULT_REPORT_COUNT = 2;
 
-// Mock modules
-vi.mock("@actions/core");
-vi.mock("../index.js");
-vi.mock("../reporters/cliReporter.js");
-vi.mock("./runCommentCleanup.js");
-vi.mock("./comments/outputActionReports.js");
+const mockCore = {
+	debug: vi.fn(),
+	getInput: vi.fn().mockReturnValue(""),
+	info: vi.fn(),
+};
 
-// Import mocked modules
-import * as core from "@actions/core";
+// Mock functions used directly in test assertions
+const mockRunOctoGuideRules = vi
+	.fn()
+	.mockResolvedValue({} as RunOctoGuideRulesResult);
+const mockCliReporter = vi.fn().mockReturnValue("");
+const mockRunCommentCleanup = vi.fn().mockResolvedValue(undefined);
+const mockOutputActionReports = vi.fn().mockResolvedValue(undefined);
 
-import { runOctoGuideRules } from "../index.js";
-import { cliReporter } from "../reporters/cliReporter.js";
-import { outputActionReports } from "./comments/outputActionReports.js";
-import { runCommentCleanup } from "./runCommentCleanup.js";
+vi.mock("@actions/core", () => ({
+	get debug() {
+		return mockCore.debug;
+	},
+	get getInput() {
+		return mockCore.getInput;
+	},
+	get info() {
+		return mockCore.info;
+	},
+}));
 
-// Get typed mock references
-const mockCore = vi.mocked(core);
-const mockRunOctoGuideRules = vi.mocked(runOctoGuideRules);
-const mockCliReporter = vi.mocked(cliReporter);
-const mockRunCommentCleanup = vi.mocked(runCommentCleanup);
-const mockOutputActionReports = vi.mocked(outputActionReports);
+vi.mock("../index.js", () => ({
+	get runOctoGuideRules() {
+		return mockRunOctoGuideRules;
+	},
+}));
 
-/**
- * Factory for creating minimal mock issue data with only the properties used by the implementation.
- * @param overrides Partial overrides to customize the mock issue data
- * @returns Mock issue object with html_url and any provided overrides
- * @example
- * ```typescript
- * const issue = createMockIssue({ html_url: "https://github.com/owner/repo/issues/123" });
- * ```
- */
-const createMockIssue = (overrides: Partial<{ html_url: string }> = {}) => ({
-	html_url: TEST_GITHUB_URL,
-	...overrides,
-});
+vi.mock("../reporters/cliReporter.js", () => ({
+	get cliReporter() {
+		return mockCliReporter;
+	},
+}));
+
+vi.mock("./runCommentCleanup.js", () => ({
+	get runCommentCleanup() {
+		return mockRunCommentCleanup;
+	},
+}));
+
+vi.mock("./comments/outputActionReports.js", () => ({
+	get outputActionReports() {
+		return mockOutputActionReports;
+	},
+}));
 
 /**
  * Creates a mock Entity object for testing purposes.
@@ -60,12 +74,18 @@ const createMockIssue = (overrides: Partial<{ html_url: string }> = {}) => ({
  */
 const createMockEntity = (
 	dataOverrides: Partial<{ html_url: string }> = {},
-): Entity =>
-	({
-		data: createMockIssue(dataOverrides),
+): Entity => {
+	const mockData = {
+		html_url: TEST_GITHUB_URL,
+		...dataOverrides,
+	} satisfies Pick<IssueEntity["data"], "html_url">;
+
+	return {
+		data: mockData as IssueEntity["data"],
 		number: 1,
 		type: "issue",
-	}) as Entity;
+	} satisfies Entity;
+};
 
 /**
  * Creates a mock EntityActor with all required methods stubbed as vi.fn().
@@ -78,12 +98,15 @@ const createMockEntity = (
  */
 const createMockActor = (): EntityActor =>
 	({
-		createComment: vi.fn(),
-		getData: vi.fn(),
-		listComments: vi.fn(),
-		metadata: { number: 1, type: "issue" } as const,
-		updateComment: vi.fn(),
-	}) as EntityActor;
+		createComment: vi.fn<(body: string) => Promise<string>>(),
+		getData: vi.fn<() => Promise<Entity["data"]>>(),
+		listComments: vi.fn<() => Promise<CommentData[]>>(),
+		metadata: {
+			number: 1,
+			type: "issue",
+		} as Omit<IssueEntity, "data">,
+		updateComment: vi.fn<(number: number, newBody: string) => Promise<void>>(),
+	}) satisfies EntityActor;
 
 /**
  * Creates a mock GitHub webhook payload with sensible defaults.
