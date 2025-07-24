@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.12.0](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.11.4...0.12.0) (2025-07-24)
+
+### Features
+
+- configure comment-header and comment-footer ([#204](https://github.com/JoshuaKGoldberg/OctoGuide/issues/204)) ([1811353](https://github.com/JoshuaKGoldberg/OctoGuide/commit/1811353b7226cc1fbb033244cfb0f0ce7dc6d25e)), closes [#193](https://github.com/JoshuaKGoldberg/OctoGuide/issues/193)
+
 ## [0.11.4](https://github.com/JoshuaKGoldberg/OctoGuide/compare/0.11.3...0.11.4) (2025-07-04)
 
 ### Bug Fixes
