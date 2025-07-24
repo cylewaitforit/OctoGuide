@@ -4,6 +4,7 @@ import type { EntityActor } from "../../actors/types.js";
 import type { IssueEntity } from "../../types/entities.js";
 import type { RuleReport, RuleReportData } from "../../types/reports.js";
 import type { RuleAboutWithUrl } from "../../types/rules.js";
+import type { Settings } from "../../types/settings.js";
 
 import { outputActionReports } from "./outputActionReports.js";
 
@@ -75,6 +76,12 @@ const mockConsole = {
 	error: vi.fn(),
 	info: vi.fn(),
 };
+const settings = {
+	comments: {
+		footer: "Test footer",
+		header: "Test header",
+	},
+} satisfies Settings;
 
 describe(outputActionReports, () => {
 	beforeEach(() => {
@@ -84,7 +91,7 @@ describe(outputActionReports, () => {
 	it("logs info and not error when no comment is created, successfully", async () => {
 		mockSetCommentForReports.mockResolvedValueOnce(undefined);
 
-		await outputActionReports(actor, entity, reports);
+		await outputActionReports(actor, entity, reports, settings);
 
 		expect(mockCore.info.mock.calls).toMatchInlineSnapshot(`
 			[
@@ -100,7 +107,7 @@ describe(outputActionReports, () => {
 	it("logs info and not error when comment creation succeeds", async () => {
 		mockSetCommentForReports.mockResolvedValueOnce(fakeComment);
 
-		await outputActionReports(actor, entity, reports);
+		await outputActionReports(actor, entity, reports, settings);
 
 		expect(mockCore.info.mock.calls).toMatchInlineSnapshot(`
 			[
@@ -119,7 +126,7 @@ describe(outputActionReports, () => {
 			status: 403,
 		});
 
-		await outputActionReports(actor, entity, reports);
+		await outputActionReports(actor, entity, reports, settings);
 
 		expect(mockCore.info.mock.calls).toMatchInlineSnapshot(`
 			[
@@ -137,7 +144,7 @@ describe(outputActionReports, () => {
 	it("logs the error as an error when comment creation fails with an unknown error", async () => {
 		mockSetCommentForReports.mockRejectedValueOnce(new Error("Oh no!"));
 
-		await outputActionReports(actor, entity, reports);
+		await outputActionReports(actor, entity, reports, settings);
 
 		expect(mockCore.info.mock.calls).toMatchInlineSnapshot(`
 			[
@@ -160,7 +167,7 @@ describe(outputActionReports, () => {
 	it("does not write an Actions summary when there are no reports", async () => {
 		mockSetCommentForReports.mockResolvedValueOnce(undefined);
 
-		await outputActionReports(actor, entity, []);
+		await outputActionReports(actor, entity, [], settings);
 
 		expect(mockCore.summary.write).not.toHaveBeenCalled();
 		expect(mockCore.setFailed).not.toHaveBeenCalled();

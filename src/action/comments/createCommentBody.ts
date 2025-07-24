@@ -1,11 +1,19 @@
 import type { Entity } from "../../types/entities.js";
+import type { Settings } from "../../types/settings.js";
 
 import { createCommentIdentifier } from "./createCommentIdentifier.js";
 
-export function createCommentBody(entity: Entity, message: string): string {
+export function createCommentBody(
+	entity: Entity,
+	message: string,
+	settings: Settings,
+): string {
 	return [
+		settings.comments.header && `## ${settings.comments.header}`,
 		message,
-		`> 🗺️ _This message was posted automatically by [OctoGuide](https://github.com/JoshuaKGoldberg/OctoGuide): a bot for GitHub repository best practices._`,
+		settings.comments.footer && `> _${settings.comments.footer}_`,
 		createCommentIdentifier(entity.data.html_url),
-	].join("\n\n");
+	]
+		.filter(Boolean)
+		.join("\n\n");
 }

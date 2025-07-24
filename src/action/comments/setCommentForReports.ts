@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 
 import type { Entity } from "../../types/entities.js";
+import type { Settings } from "../../types/settings.js";
 
 import { EntityActor } from "../../actors/types.js";
 import { markdownReportPassMessage } from "../../reporters/markdownReporter.js";
@@ -17,6 +18,7 @@ export async function setCommentForReports(
 	actor: EntityActor,
 	entity: Entity,
 	reported: string,
+	settings: Settings,
 ): Promise<ReportComment | undefined> {
 	const existingComment = await getExistingComment(actor, entity.data.html_url);
 
@@ -34,6 +36,7 @@ export async function setCommentForReports(
 				entity,
 				existingComment,
 				reported,
+				settings,
 			);
 		}
 		return (
@@ -48,6 +51,7 @@ export async function setCommentForReports(
 			entity,
 			existingComment,
 			reported,
+			settings,
 		);
 		return { status: "existing", url: existingComment.html_url };
 	}
@@ -57,6 +61,7 @@ export async function setCommentForReports(
 		actor,
 		entity,
 		reported,
+		settings,
 	);
 	core.info(`Created new comment: ${newCommentUrl}`);
 

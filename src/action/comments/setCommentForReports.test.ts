@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import type { EntityActor } from "../../actors/types.js";
 import type { IssueEntity } from "../../types/entities.js";
+import type { Settings } from "../../types/settings.js";
 
 import { markdownReportPassMessage } from "../../reporters/markdownReporter.js";
 import { setCommentForReports } from "./setCommentForReports.js";
@@ -64,6 +65,13 @@ const existingComment = {
 
 const reportFail = "Oh no!";
 
+const settings = {
+	comments: {
+		footer: "Test footer",
+		header: "Test header",
+	},
+} satisfies Settings;
+
 describe(setCommentForReports, () => {
 	it("returns without setting anything when the report is a pass and there is no existing comment", async () => {
 		mockGetExistingComment.mockResolvedValueOnce(undefined);
@@ -72,6 +80,7 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			markdownReportPassMessage,
+			settings,
 		);
 
 		expect(mockUpdateExistingCommentForReports).not.toHaveBeenCalled();
@@ -86,6 +95,7 @@ describe(setCommentForReports, () => {
 			actor,
 			entity,
 			markdownReportPassMessage,
+			settings,
 		);
 
 		expect(mockUpdateExistingCommentForReports).toHaveBeenCalledWith(
@@ -93,6 +103,7 @@ describe(setCommentForReports, () => {
 			entity,
 			existingComment,
 			markdownReportPassMessage,
+			settings,
 		);
 		expect(actual).toEqual({
 			status: "existing",
@@ -106,13 +117,19 @@ describe(setCommentForReports, () => {
 	it("updates the comment when the report is a fail and there is an existing comment", async () => {
 		mockGetExistingComment.mockResolvedValueOnce(existingComment);
 
-		const actual = await setCommentForReports(actor, entity, reportFail);
+		const actual = await setCommentForReports(
+			actor,
+			entity,
+			reportFail,
+			settings,
+		);
 
 		expect(mockUpdateExistingCommentForReports).toHaveBeenCalledWith(
 			actor,
 			entity,
 			existingComment,
 			reportFail,
+			settings,
 		);
 		expect(actual).toEqual({
 			status: "existing",
@@ -128,12 +145,18 @@ describe(setCommentForReports, () => {
 		mockGetExistingComment.mockResolvedValueOnce(undefined);
 		mockCreateNewCommentForReports.mockResolvedValueOnce(newCommentUrl);
 
-		const actual = await setCommentForReports(actor, entity, reportFail);
+		const actual = await setCommentForReports(
+			actor,
+			entity,
+			reportFail,
+			settings,
+		);
 
 		expect(mockCreateNewCommentForReports).toHaveBeenCalledWith(
 			actor,
 			entity,
 			reportFail,
+			settings,
 		);
 		expect(actual).toEqual({
 			status: "created",
