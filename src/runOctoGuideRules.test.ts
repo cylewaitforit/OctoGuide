@@ -42,43 +42,62 @@ vi.mock("./execution/runRuleOnEntity.js", () => ({
 	},
 }));
 
-// Mock the configs to provide test rules
 vi.mock("./rules/configs.js", () => ({
 	configs: {
 		recommended: {
-			"issue-body-not-empty": {
-				about: { description: "Test rule 1", name: "issue-body-not-empty" },
+			"comment-meaningless": {
+				about: {
+					description: "Comments should not be meaningless",
+					name: "comment-meaningless",
+				},
 			},
-			"issue-labels-required": {
-				about: { description: "Test rule 3", name: "issue-labels-required" },
+			"pr-body-not-empty": {
+				about: {
+					description: "PR bodies should not be empty",
+					name: "pr-body-not-empty",
+				},
 			},
-			"issue-title-conventional": {
-				about: { description: "Test rule 2", name: "issue-title-conventional" },
+			"pr-branch-non-default": {
+				about: {
+					description: "PRs should be sent from a non-default branch",
+					name: "pr-branch-non-default",
+				},
 			},
 		},
 	},
 }));
 
-// Mock allRules to include additional rules that aren't in the recommended config
 vi.mock("./rules/all.js", () => ({
 	allRules: [
 		{
-			about: { description: "Test rule 1", name: "issue-body-not-empty" },
-		},
-		{
-			about: { description: "Test rule 3", name: "issue-labels-required" },
-		},
-		{
-			about: { description: "Test rule 2", name: "issue-title-conventional" },
+			about: {
+				description: "Comments should not be meaningless",
+				name: "comment-meaningless",
+			},
 		},
 		{
 			about: {
-				description: "Custom rule from all",
+				description: "PR bodies should not be empty",
+				name: "pr-body-not-empty",
+			},
+		},
+		{
+			about: {
+				description: "PRs should be sent from a non-default branch",
+				name: "pr-branch-non-default",
+			},
+		},
+		{
+			about: {
+				description: "PR titles should be in conventional commit format",
 				name: "pr-title-conventional",
 			},
 		},
 		{
-			about: { description: "Another custom rule", name: "comment-meaningful" },
+			about: {
+				description: "PRs should be linked as closing an issue",
+				name: "pr-linked-issue",
+			},
 		},
 	],
 }));
@@ -181,9 +200,9 @@ describe("runOctoGuideRules", () => {
 			settings: {
 				config: "recommended",
 				rules: {
-					"issue-body-not-empty": false,
-					"issue-labels-required": false,
-					"issue-title-conventional": false,
+					"comment-meaningless": false,
+					"pr-body-not-empty": false,
+					"pr-branch-non-default": false,
 				},
 			},
 		});
@@ -198,7 +217,6 @@ describe("runOctoGuideRules", () => {
 			reports: [],
 		});
 
-		// Verify runRuleOnEntity was never called (all rules explicitly disabled)
 		expect(mockRunRuleOnEntity).not.toHaveBeenCalled();
 	});
 
@@ -238,15 +256,14 @@ describe("runOctoGuideRules", () => {
 			reports: [],
 		});
 
-		// Verify runRuleOnEntity was called three times (for all rules in the recommended config)
 		expect(mockRunRuleOnEntity).toHaveBeenCalledTimes(3);
 
 		const calledRules = mockRunRuleOnEntity.mock.calls.map(
 			(call) => (call[1] as { about: { name: string } }).about.name,
 		);
-		expect(calledRules).toContain("issue-body-not-empty");
-		expect(calledRules).toContain("issue-labels-required");
-		expect(calledRules).toContain("issue-title-conventional");
+		expect(calledRules).toContain("comment-meaningless");
+		expect(calledRules).toContain("pr-body-not-empty");
+		expect(calledRules).toContain("pr-branch-non-default");
 	});
 
 	it("should default to recommended config when no settings are provided at all", async () => {
@@ -270,7 +287,6 @@ describe("runOctoGuideRules", () => {
 		const result = await runOctoGuideRules({
 			auth: "test-token",
 			entity: "https://github.com/test-owner/test-repo/issues/1",
-			// No settings provided at all - should default to recommended config
 		});
 
 		expect(result).toEqual({
@@ -283,16 +299,16 @@ describe("runOctoGuideRules", () => {
 			reports: [],
 		});
 
-		// Verify runRuleOnEntity was called three times (for all rules in the recommended config)
 		expect(mockRunRuleOnEntity).toHaveBeenCalledTimes(3);
 
 		const calledRules = mockRunRuleOnEntity.mock.calls.map(
 			(call) => (call[1] as { about: { name: string } }).about.name,
 		);
-		expect(calledRules).toContain("issue-body-not-empty");
-		expect(calledRules).toContain("issue-labels-required");
-		expect(calledRules).toContain("issue-title-conventional");
+		expect(calledRules).toContain("comment-meaningless");
+		expect(calledRules).toContain("pr-body-not-empty");
+		expect(calledRules).toContain("pr-branch-non-default");
 	});
+
 	it("should filter rules based on config and rule overrides", async () => {
 		const mockOctokit = createMockOctokit();
 		const mockEntityData = {
@@ -317,13 +333,10 @@ describe("runOctoGuideRules", () => {
 			settings: {
 				config: "recommended",
 				rules: {
-					// Disable one rule from config
-					"issue-title-conventional": false,
-					// Enable rules that exist in allRules but not in recommended config
-					"comment-meaningful": true,
-					"pr-title-conventional": true,
-					// Enable a rule that doesn't exist anywhere
 					"non-existent-rule": true,
+					"pr-branch-non-default": false,
+					"pr-linked-issue": true,
+					"pr-title-conventional": true,
 				},
 			},
 		});
@@ -338,28 +351,17 @@ describe("runOctoGuideRules", () => {
 			reports: [],
 		});
 
-		// Should run 4 rules:
-		// From config (not disabled): issue-body-not-empty, issue-labels-required
-		// From allRules (enabled in settings): comment-meaningful, pr-title-conventional
-		// Should NOT run: issue-title-conventional (disabled), non-existent-rule (doesn't exist)
 		expect(mockRunRuleOnEntity).toHaveBeenCalledTimes(4);
 
 		const calledRules = mockRunRuleOnEntity.mock.calls.map(
 			(call) => (call[1] as { about: { name: string } }).about.name,
 		);
 
-		// Check that config rules (not disabled) are included
-		expect(calledRules).toContain("issue-body-not-empty");
-		expect(calledRules).toContain("issue-labels-required");
-
-		// Check that additional rules from allRules are included
-		expect(calledRules).toContain("comment-meaningful");
+		expect(calledRules).toContain("comment-meaningless");
+		expect(calledRules).toContain("pr-body-not-empty");
+		expect(calledRules).toContain("pr-linked-issue");
 		expect(calledRules).toContain("pr-title-conventional");
-
-		// Check that disabled rule is not included
-		expect(calledRules).not.toContain("issue-title-conventional");
-
-		// Check that non-existent rule is not included
+		expect(calledRules).not.toContain("pr-branch-non-default");
 		expect(calledRules).not.toContain("non-existent-rule");
 
 		expect(mockOctokitFromAuth).toHaveBeenCalledWith({ auth: "test-token" });
