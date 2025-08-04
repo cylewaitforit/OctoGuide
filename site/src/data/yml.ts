@@ -62,3 +62,37 @@ export const getStartedFooter = `jobs:
         with:
 +          comment-footer: "🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices."
           github-token: \${{ secrets.GITHUB_TOKEN }}`;
+
+export const getStartedRuleDisable = `jobs:
+  octoguide:
+    if: \${{ !endsWith(github.actor, '[bot]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: JoshuaKGoldberg/octoguide${atVersion}
+        with:
++          comment-meaningless: "false"
+          github-token: \${{ secrets.GITHUB_TOKEN }}`;
+
+export const getStartedRuleEnable = `jobs:
+  octoguide:
+    if: \${{ !endsWith(github.actor, '[bot]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: JoshuaKGoldberg/octoguide${atVersion}
+        with:
++          config: recommended
+          github-token: \${{ secrets.GITHUB_TOKEN }}
++          pr-title-conventional: "true"`;
+
+export const getStartedRuleNone = `jobs:
+  octoguide:
+    if: \${{ !endsWith(github.actor, '[bot]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: JoshuaKGoldberg/octoguide${atVersion}
+        with:
++          comment-meaningless: "true"
++          config: none
+          github-token: \${{ secrets.GITHUB_TOKEN }}
++          pr-linked-issue: "true"
++          text-image-alt-text: "true"`;

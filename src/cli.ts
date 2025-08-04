@@ -26,7 +26,10 @@ export async function cli(...args: string[]) {
 		throw new Error(`Unknown config provided: '${config}'`);
 	}
 
-	const { reports } = await runOctoGuideRules({ config, entity });
+	const { reports } = await runOctoGuideRules({
+		entity,
+		settings: { config },
+	});
 
 	return cliReporter(reports);
 }

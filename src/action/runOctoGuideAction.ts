@@ -4,6 +4,7 @@ import * as core from "@actions/core";
 
 import { runOctoGuideRules } from "../index.js";
 import { cliReporter } from "../reporters/cliReporter.js";
+import { allRules } from "../rules/all.js";
 import { isKnownConfig } from "../rules/configs.js";
 import { EntityData } from "../types/entities.js";
 import { outputActionReports } from "./comments/outputActionReports.js";
@@ -48,6 +49,18 @@ export async function runOctoGuideAction(context: typeof github.context) {
 		throw new Error(`Unknown config provided: ${config}`);
 	}
 
+	const rules = allRules.reduce((acc: Record<string, boolean>, rule) => {
+		const ruleInput = core.getInput(rule.about.name);
+
+		if (!ruleInput) {
+			return acc;
+		}
+
+		acc[rule.about.name] = ruleInput === "true";
+
+		return acc;
+	}, {});
+
 	const settings = {
 		comments: {
 			footer:
@@ -55,12 +68,14 @@ export async function runOctoGuideAction(context: typeof github.context) {
 				"🗺️ This message was posted automatically by [OctoGuide](https://octo.guide): a bot for GitHub repository best practices.",
 			header: core.getInput("comment-header"),
 		},
+		config,
+		rules,
 	};
 
 	const { actor, entity, reports } = await runOctoGuideRules({
 		auth,
-		config,
 		entity: url,
+		settings,
 	});
 
 	if (reports.length) {

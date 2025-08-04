@@ -5,9 +5,40 @@ branding:
 description: Runs OctoGuide as a GitHub Action. 🗺️
 inputs:
   config:
-    description: Which config to use, as 'recommended' (default) or 'strict'.
+    description: Which config to use, as 'recommended' (default), 'strict', or 'none'.
+    required: false
+    default: "recommended"
   github-token:
     description: GitHub token (PAT) with repo and workflow permissions.
+    required: false
+  comment-header:
+    description: Custom header text for bot comments.
+    required: false
+  comment-footer:
+    description: Custom footer text for bot comments.
+    required: false
+  # Individual rule overrides
+  comment-meaningless:
+    description: "Enable/disable the comment-meaningless rule (true/false)"
+    required: false
+  pr-body-not-empty:
+    description: "Enable/disable the pr-body-not-empty rule (true/false)"
+    required: false
+  pr-branch-non-default:
+    description: "Enable/disable the pr-branch-non-default rule (true/false)"
+    required: false
+  pr-linked-issue:
+    description: "Enable/disable the pr-linked-issue rule (true/false)"
+    required: false
+  pr-task-completion:
+    description: "Enable/disable the pr-task-completion rule (true/false)"
+    required: false
+  pr-title-conventional:
+    description: "Enable/disable the pr-title-conventional rule (true/false)"
+    required: false
+  text-image-alt-text:
+    description: "Enable/disable the text-image-alt-text rule (true/false)"
+    required: false
 name: OctoGuide Action
 runs:
   main: dist/index.js

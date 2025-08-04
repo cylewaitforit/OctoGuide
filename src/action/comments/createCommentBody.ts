@@ -9,9 +9,9 @@ export function createCommentBody(
 	settings: Settings,
 ): string {
 	return [
-		settings.comments.header && `## ${settings.comments.header}`,
+		settings.comments?.header && `## ${settings.comments.header}`,
 		message,
-		settings.comments.footer && `> _${settings.comments.footer}_`,
+		settings.comments?.footer && `> _${settings.comments.footer}_`,
 		createCommentIdentifier(entity.data.html_url),
 	]
 		.filter(Boolean)

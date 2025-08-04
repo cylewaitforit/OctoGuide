@@ -9,6 +9,9 @@ import {
 	getStartedStrict,
 	getStartedHeader,
 	getStartedFooter,
+	getStartedRuleDisable,
+	getStartedRuleEnable,
+	getStartedRuleNone,
 } from "../../data/yml.js";
 
 OctoGuide checks that contributor activity on your GitHub repository aligns with common expectations of smoothly-running projects.
@@ -92,3 +95,40 @@ You can customize the footer message that OctoGuide adds to its comments by prov
 />
 
 If no custom footer is provided, OctoGuide uses its default message.
+
+### Enabling and Disabling Individual Rules
+
+You can enable or disable specific rules by providing inputs with the rule names set to `"true"` or `"false"`.
+This allows you to customize which rules are active beyond the preset configs.
+
+**Examples:**
+
+To disable a rule that's normally enabled in your chosen config:
+
+<Code
+	code={getStartedRuleDisable}
+	meta="lang=yml"
+	lang="diff"
+	title=".github/workflows/octoguide.yml"
+/>
+
+To enable a rule that's not included in your chosen config:
+
+<Code
+	code={getStartedRuleEnable}
+	meta="lang=yml"
+	lang="diff"
+	title=".github/workflows/octoguide.yml"
+/>
+
+To use only specific rules without any preset config:
+
+<Code
+	code={getStartedRuleNone}
+	meta="lang=yml"
+	lang="diff"
+	title=".github/workflows/octoguide.yml"
+/>
+
+Rule names use kebab-case and correspond to the rule names shown in the [Rules](./rules) documentation.
+When a rule is explicitly set via input, it takes precedence over the preset config settings.

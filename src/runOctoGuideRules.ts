@@ -2,13 +2,14 @@ import * as core from "@actions/core";
 import { octokitFromAuth } from "octokit-from-auth";
 
 import type { EntityActor } from "./actors/types.js";
-import type { ConfigName } from "./types/core.js";
 import type { Entity } from "./types/entities.js";
 import type { RuleReport } from "./types/reports.js";
 import type { RuleContext } from "./types/rules.js";
+import type { Settings } from "./types/settings.js";
 
 import { createActor } from "./actors/createActor.js";
 import { runRuleOnEntity } from "./execution/runRuleOnEntity.js";
+import { allRules } from "./rules/all.js";
 import { configs } from "./rules/configs.js";
 
 /**
@@ -21,17 +22,16 @@ export interface RunOctoGuideRulesOptions {
 	auth?: string;
 
 	/**
-	 * Preset configuration to run rules from.
-	 * @default "recommended"
-	 */
-	config?: ConfigName | undefined;
-
-	/**
 	 * URL of the GitHub entity to scan.
 	 * @todo Support passing in the entity itself:
 	 * https://github.com/JoshuaKGoldberg/OctoGuide/issues/85
 	 */
 	entity: string;
+
+	/**
+	 * Settings for the run, including rules to enable.
+	 */
+	settings?: Settings;
 }
 
 /**
@@ -59,8 +59,8 @@ export interface RunOctoGuideRulesResult {
  */
 export async function runOctoGuideRules({
 	auth,
-	config = "recommended",
 	entity: url,
+	settings,
 }: RunOctoGuideRulesOptions): Promise<RunOctoGuideRulesResult> {
 	// TODO: There's no need to create a full *writing* actor here;
 	// runOctoGuide only reads entities and runs rules on them.
@@ -86,8 +86,24 @@ export async function runOctoGuideRules({
 
 	const reports: RuleReport[] = [];
 
+	const config = settings?.config ?? "recommended";
+	const configRuleNames = Object.values(configs[config]).map(
+		(rule) => rule.about.name,
+	);
+	const ruleOverrides = settings?.rules ?? {};
+
+	const enabledRules = allRules.filter((rule) => {
+		const ruleName = rule.about.name;
+
+		if (ruleName in ruleOverrides) {
+			return ruleOverrides[ruleName];
+		}
+
+		return configRuleNames.includes(ruleName);
+	});
+
 	await Promise.all(
-		Object.values(configs[config]).map(async (rule) => {
+		enabledRules.map(async (rule) => {
 			const context: RuleContext = {
 				locator,
 				octokit,

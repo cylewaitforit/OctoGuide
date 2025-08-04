@@ -1,5 +1,9 @@
+import type { ConfigName } from "./core.js";
+
 export interface Settings {
-	comments: Comments;
+	comments?: Comments;
+	config?: ConfigName;
+	rules?: Record<string, boolean>;
 }
 
 interface Comments {

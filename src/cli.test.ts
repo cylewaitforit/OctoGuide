@@ -37,7 +37,10 @@ describe(cli, () => {
 
 		await cli(entity, "--config", config);
 
-		expect(mockRunOctoGuideRules).toHaveBeenCalledWith({ config, entity });
+		expect(mockRunOctoGuideRules).toHaveBeenCalledWith({
+			entity,
+			settings: { config },
+		});
 		expect(mockCliReporter).toHaveBeenCalled();
 	});
 });
